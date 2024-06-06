@@ -1,0 +1,25 @@
+.fade-in {
+    animation: fadeIn 1.5s ease-in;
+  }
+
+  .revealed-clue {
+    opacity: 0.5; /* Adjust the opacity as needed */
+    animation: fadeIn 1.5s ease-in;
+  }
+  
+  /* Styles for the last clue */
+  .last-clue {
+    /* Add specific styling for the last clue */
+    opacity: 1;
+    animation: fadeIn 1.5s ease-in;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
