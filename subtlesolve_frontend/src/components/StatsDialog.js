@@ -3,9 +3,9 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Chart } from "react-chartjs-2";
 import Button from '@mui/material/Button';
 import { Box, Typography } from '@mui/material';
+import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, BarElement } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { useState, useEffect } from 'react';
@@ -107,7 +107,7 @@ export default function StatsDialog({ open, handleClose, played, win_percent, cu
         </Card>
         <Card sx={{ ...commonCardStyles, height: 400 }}>
           <CardContent sx={{ height: '100%' }}>
-            <Chart type="bar" data={chartData} options={options} />
+            <Bar data={chartData} options={options} />
           </CardContent>
         </Card>
         <Button variant="contained" color="success" onClick={() => handleShare('web')} sx={{ marginTop: 2, backgroundColor: 'white', color: 'black' }}>
