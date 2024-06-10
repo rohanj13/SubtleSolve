@@ -16,74 +16,108 @@ services:
     build: ./backend
     ports:
       - "8081:8081"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATA_MONGODB_URI=mongodb://root:example@mongodb:27017/subtlesolvedb?authSource=admin
+    # environment:
+    #   - SPRING_PROFILES_ACTIVE=docker
+    #   - SPRING_DATA_MONGODB_URI=mongodb://root:example@mongodb:27017/subtlesolvedb?authSource=admin
     depends_on:
-      - postgresql
+      - postgres
       - keycloak
-      - mongodb
+
+  postgres:
+    image: postgres:16.2
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.4
-    command: ["start-dev"]
-    container_name: keycloak
+    command: start
     environment:
-      DB_VENDOR: ${DB_VENDOR}
-      DB_ADDR: database
-      DB_PORT: 5432
-      DB_SCHEMA: public
-      DB_DATABASE: ${DB_DATABASE}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      KEYCLOAK_USER: ${KEYCLOAK_USER}
-      KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8089
+      KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HEALTH_ENABLED: true
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
-      KC_PROXY_MODE: edge
-      KC_METRICS_ENABLED: true
-      KC_HTTP_ENABLED: true
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres/${POSTGRES_DB}
+      KC_DB_USERNAME: ${POSTGRES_USER}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "8089:8080"
+      - 8089:8080
+    restart: always
     depends_on:
-      - postgresql
-    restart: always
-    links: 
-      - postgresql
-
-  postgresql:
-    image: postgres:14
-    environment:
-    # add multiple schemas
-      # POSTGRES_MULTIPLE_DATABASES: ${DB_DATABASE},${KEYCLOAK_DATABASE}
-      POSTGRES_DB: ${DB_DATABASE}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      # POSTGRES_KEYCLOAK_USER: ${KEYCLOAK_USER}
-      # POSTGRES_KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
-      # POSTGRES_DB2: ${KEYCLOAK_DATABASE}
-    hostname: local
-    restart: always
-    volumes:
-      - ./db-data:/var/lib/postgresql/data/
-      - ./sql:/docker-entrypoint-initdb.d/:ro
-      # - ./sql/access_attempt.sql:/docker-entrypoint-initdb.d/A.sql
-      # - ./sql/bceid.sql:/docker-entrypoint-initdb.d/B.sql
-      # - ./sql/lookup_activitytype.sql:/docker-entrypoint-initdb.d/C.sql
-      # - ./sql/lookup_gender_pronoun.sql:/docker-entrypoint-initdb.d/D.sql
-      # - ./sql/client.sql:/docker-entrypoint-initdb.d/E.sql
-    ports: 
-      - "5439:5432"
-  mongodb:
-    image: mongodb/mongodb-community-server:latest
-    ports:
-      - "27017:27017"
-    volumes:
-      - subtlesolve_data:/data/db
-    environment:
-      - MONGODB_INITDB_ROOT_USERNAME=root
-      - MONGODB_INITDB_ROOT_PASSWORD=example
-      - MONGO_INITDB_DATABASE=subtlesolvedb
+      - postgres
 
 volumes:
-  subtlesolve_data:
+  postgres_data:
+    driver: local
+
+  # keycloak:
+  #   image: quay.io/keycloak/keycloak:24.0.4
+  #   command: ["start-dev"]
+  #   container_name: keycloak
+  #   environment:
+  #     DB_VENDOR: ${DB_VENDOR}
+  #     DB_ADDR: database
+  #     DB_PORT: 5432
+  #     DB_SCHEMA: public
+  #     DB_DATABASE: ${DB_DATABASE}
+  #     DB_USER: ${DB_USER}
+  #     DB_PASSWORD: ${DB_PASSWORD}
+  #     KEYCLOAK_USER: ${KEYCLOAK_USER}
+  #     KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+  #     KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+  #     KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+  #     KC_PROXY_MODE: edge
+  #     KC_METRICS_ENABLED: true
+  #     KC_HTTP_ENABLED: true
+  #   ports:
+  #     - "8089:8080"
+  #   depends_on:
+  #     - postgresql
+  #   restart: always
+  #   links: 
+  #     - postgresql
+
+  # postgresql:
+  #   image: postgres:14
+  #   environment:
+  #   # add multiple schemas
+  #     # POSTGRES_MULTIPLE_DATABASES: ${DB_DATABASE},${KEYCLOAK_DATABASE}
+  #     POSTGRES_DB: ${DB_DATABASE}
+  #     POSTGRES_USER: ${DB_USER}
+  #     POSTGRES_PASSWORD: ${DB_PASSWORD}
+  #     # POSTGRES_KEYCLOAK_USER: ${KEYCLOAK_USER}
+  #     # POSTGRES_KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+  #     # POSTGRES_DB2: ${KEYCLOAK_DATABASE}
+  #   hostname: local
+  #   restart: always
+  #   volumes:
+  #     - ./db-data:/var/lib/postgresql/data/
+  #     - ./sql:/docker-entrypoint-initdb.d/:ro
+  #     # - ./sql/access_attempt.sql:/docker-entrypoint-initdb.d/A.sql
+  #     # - ./sql/bceid.sql:/docker-entrypoint-initdb.d/B.sql
+  #     # - ./sql/lookup_activitytype.sql:/docker-entrypoint-initdb.d/C.sql
+  #     # - ./sql/lookup_gender_pronoun.sql:/docker-entrypoint-initdb.d/D.sql
+  #     # - ./sql/client.sql:/docker-entrypoint-initdb.d/E.sql
+  #   ports: 
+  #     - "5439:5432"
+#   mongodb:
+#     image: mongodb/mongodb-community-server:latest
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - subtlesolve_data:/data/db
+#     environment:
+#       - MONGODB_INITDB_ROOT_USERNAME=root
+#       - MONGODB_INITDB_ROOT_PASSWORD=example
+#       - MONGO_INITDB_DATABASE=subtlesolvedb
+
+# volumes:
+#   subtlesolve_data:

@@ -29,7 +29,7 @@ RUN npm install
 COPY . .
 
 # Build for production.
-RUN npm run build --production
+RUN npm run build
 
 # Install `serve` to run the application.
 RUN npm install -g serve
@@ -40,3 +40,9 @@ EXPOSE 3000
 # Run application
 #CMD [ "npm", "start" ]
 CMD serve -s build
+
+# FROM nginx:1.25.0-alpine as production
+# COPY --from=build /app/build /usr/share/nginx/html
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
+# EXPOSE 80
+# CMD ["nginx", "-g", "daemon off;"]

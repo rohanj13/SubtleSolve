@@ -207,4 +207,7 @@ gradle-app.setting
 *.hprof
 
 .vscode/
+
+db-data/
+sql/
 # End of https://www.toptal.com/developers/gitignore/api/gradle,java,react,node
