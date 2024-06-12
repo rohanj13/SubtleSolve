@@ -9,7 +9,6 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import SettingsIcon from '@mui/icons-material/Settings';
 import InfoIcon from '@mui/icons-material/Info';
 import { useKeycloak } from '@react-keycloak/web';
-import StatsDialog from './StatsDialog';
 import { PuzzleService } from '../services/PuzzleService';
 import Avatar from '@mui/material/Avatar';
 import InstructionsDialog from './InstructionDialog';

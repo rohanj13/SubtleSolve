@@ -27,8 +27,16 @@ public class PuzzleServiceImpl implements PuzzleService {
     @Override
     public DailyGame createDailyGame(String today) {
         DailyGame dg = new DailyGame();
-        Question question = questionRepo.random().getMappedResults().stream().findFirst().orElse(null);
-        dg.setQuestion(question.getQuestionId());
+        boolean gotQuestion = false;
+        Question question = null;
+        while (!gotQuestion) {
+            question = questionRepo.random().getMappedResults().stream().findFirst().orElse(null);
+
+            if (!question.getPlayed()) {
+                dg.setQuestion(question.getQuestionId());
+                gotQuestion = true;
+            }
+        }
 
         // System.out.println(now);
         dg.setDate(today);
