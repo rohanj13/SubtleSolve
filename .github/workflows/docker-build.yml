@@ -54,10 +54,10 @@ jobs:
         run: |
           rsync -avz -e "ssh -o StrictHostKeyChecking=no" . opc@${{ secrets.OCI_VM_IP }}:~/subtlesolve/
 
-      - name: Deploy Docker Compose
-        env:
-          TAG: ${{ github.sha }}
-        run: |
-          ssh -i {{ secrets.OCI_SSH_PRIVATE_KEY }} opc@${{ secrets.OCI_VM_IP }}
-            cd ~/subtlesolve
-            TAG=${{ github.sha }} docker-compose up --build
+      # - name: Deploy Docker Compose
+      #   env:
+      #     TAG: ${{ github.sha }}
+      #   run: |
+      #     ssh -i {{ secrets.OCI_SSH_PRIVATE_KEY }} opc@${{ secrets.OCI_VM_IP }}
+      #       cd ~/subtlesolve
+      #       TAG=${{ github.sha }} docker-compose up --build
