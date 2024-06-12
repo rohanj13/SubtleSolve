@@ -58,6 +58,9 @@ jobs:
         env:
           TAG: ${{ github.sha }}
         run: |
-          ssh -i {{ secrets.OCI_SSH_PRIVATE_KEY }} opc@${{ secrets.OCI_VM_IP }}
+          ssh opc@${{ secrets.OCI_VM_IP }}
             cd ~/subtlesolve
             TAG=${{ github.sha }} docker-compose up --build
+      # - name: Run Docker Compose on server
+      #   run: |
+      #     ssh opc@${{ secrets.OCI_VM_IP }} 'cd /subtlesolve && sudo docker-compose up -d'
