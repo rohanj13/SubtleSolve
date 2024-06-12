@@ -4,11 +4,6 @@ services:
     build: ./subtlesolve_frontend
     ports:
       - "3000:3000"
-    develop:
-      watch:
-        - action: sync
-          path: ./subtlesolve_frontend
-          target: /code
     depends_on:
       - spring-boot-app
 

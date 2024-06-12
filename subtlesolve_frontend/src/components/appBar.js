@@ -22,19 +22,21 @@ export default function ButtonAppBar() {
   const [openInstructions, setOpenInstructions] = React.useState(false);
   // const [response, setResponse] = React.useState()
 
-  // React.useEffect(() => {
+  React.useEffect(() => {
+    if (!!keycloak.authenticated) {
+      const fullname = keycloak.tokenParsed.name;
+      
+      setName(fullname);
+      console.log(fullname);
+    }
+  }, []);
+
+  // const handleAvatar = () => {
   //   if (!!keycloak.authenticated) {
   //     const fullname = keycloak.tokenParsed.name;
   //     setName(fullname);
   //   }
-  // }, []);
-
-  const handleAvatar = () => {
-    if (!!keycloak.authenticated) {
-      const fullname = keycloak.tokenParsed.name;
-      setName(fullname);
-    }
-  };
+  // };
 
   const handleStatsClick = async () => {
     if (!keycloak.authenticated) {
@@ -123,7 +125,6 @@ export default function ButtonAppBar() {
               }}
             >
               <Button color="inherit" sx={{ display: 'flex', marginRight: 2 }} onClick={() => keycloak.logout()}>Logout</Button>
-              {handleAvatar}
               <Avatar {...stringAvatar(name)} />
             </Box>
             )}
