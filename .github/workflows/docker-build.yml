@@ -58,6 +58,6 @@ jobs:
         env:
           TAG: ${{ github.sha }}
         run: |
-          ssh -o StrictHostKeyChecking=no opc@${{ secrets.OCI_VM_IP }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no opc@${{ secrets.OCI_VM_IP }}
             cd ~/subtlesolve
             TAG=${{ github.sha }} docker-compose up -d
