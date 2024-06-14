@@ -34,33 +34,33 @@ jobs:
           docker push rohanj13/subtlesolverepo:spring-boot-app-${TAG}
           docker push rohanj13/subtlesolverepo:react-app-${TAG}
 
-  deploy:
-    needs: build-and-push
-    runs-on: ubuntu-latest
+  # deploy:
+  #   needs: build-and-push
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
 
-      - name: Install SSH client
-        run: sudo apt-get install -y openssh-client
+  #     - name: Install SSH client
+  #       run: sudo apt-get install -y openssh-client
 
-      - name: Add SSH key
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.OCI_SSH_PRIVATE_KEY }}
+  #     - name: Add SSH key
+  #       uses: webfactory/ssh-agent@v0.5.3
+  #       with:
+  #         ssh-private-key: ${{ secrets.OCI_SSH_PRIVATE_KEY }}
 
-      - name: Copy repository to VM
-        run: |
-          rsync -avz -e "ssh -o StrictHostKeyChecking=no" . opc@${{ secrets.OCI_VM_IP }}:~/subtlesolve/
+  #     - name: Copy repository to VM
+  #       run: |
+  #         rsync -avz -e "ssh -o StrictHostKeyChecking=no" . opc@${{ secrets.OCI_VM_IP }}:~/subtlesolve/
 
-      - name: Deploy Docker Compose
-        env:
-          TAG: ${{ github.sha }}
-        run: |
-          ssh opc@${{ secrets.OCI_VM_IP }}
-            cd ~/subtlesolve
-            TAG=${{ github.sha }} docker-compose up --build
+  #     - name: Deploy Docker Compose
+  #       env:
+  #         TAG: ${{ github.sha }}
+  #       run: |
+  #         ssh opc@${{ secrets.OCI_VM_IP }}
+  #           cd ~/subtlesolve
+  #           TAG=${{ github.sha }} docker-compose up --build
       # - name: Run Docker Compose on server
       #   run: |
       #     ssh opc@${{ secrets.OCI_VM_IP }} 'cd /subtlesolve && sudo docker-compose up -d'
