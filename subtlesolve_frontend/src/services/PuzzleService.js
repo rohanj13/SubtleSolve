@@ -76,7 +76,7 @@ function updateScore(gameID, score, token) {
 // -- Axios
 
 const instance = axios.create({
-  baseURL: "http://spring-boot-app:8081/api"
+  baseURL: "http://localhost:8081/api"
 })
 
 instance.interceptors.response.use(response => {
