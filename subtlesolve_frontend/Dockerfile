@@ -1,16 +1,18 @@
-#Stage 1: Build the React app
-FROM node:21.6.1-alpine AS build
+# build front-end
+FROM node:21.6.1-alpine as build
 WORKDIR /app
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm install
-COPY . ./
+ENV PATH /app/node_modules/.bin:$PATH
+COPY package.json /app/package.json
+RUN npm install --silent
+COPY . /app
 RUN npm run build
 
-# Stage 2: Serve the React app
+# move builds to nginx and run the front-end
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
+RUN rm /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/nginx/conf.d
+EXPOSE 3000
 CMD ["nginx", "-g", "daemon off;"]
 
 # pull official base image
@@ -39,7 +41,7 @@ CMD ["nginx", "-g", "daemon off;"]
 
 # # Run application
 # #CMD [ "npm", "start" ]
-# CMD serve -s build
+# CMD ["serve", "-s", "dist", "-l", "3000"]
 
 # FROM nginx:alpine
 # COPY --from=build /app/build /usr/share/nginx/html
