@@ -36,6 +36,7 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.4
     command: start
+    container_name: "keycloak"
     environment:
       KC_HOSTNAME: localhost
       KC_HOSTNAME_PORT: 8080
