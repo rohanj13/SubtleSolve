@@ -1,11 +1,12 @@
 services:
-  
   proxy:
     build: ./nginx_container
     container_name: "subtlesolve-proxy"
     restart: always
     ports:
       - "80:80"
+    networks:
+      - subtlesolve-network
   
   subtlesolve-fe:
     image: rohanj13/subtlesolverepo:react-app-${TAG}
@@ -13,16 +14,17 @@ services:
     container_name: "subtlesolve-fe"
     depends_on:
       - subtlesolve-be
+    networks:
+      - subtlesolve-network
 
   subtlesolve-be:
     build: ./backend
     container_name: "subtlesolve-be"
-    # environment:
-    #   - SPRING_PROFILES_ACTIVE=docker
-    #   - SPRING_DATA_MONGODB_URI=mongodb://root:example@mongodb:27017/subtlesolvedb?authSource=admin
     depends_on:
       - postgres
       - keycloak
+    networks:
+      - subtlesolve-network
 
   postgres:
     image: postgres:16.2
@@ -32,13 +34,15 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - subtlesolve-network
 
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.4
     command: start
     container_name: "keycloak"
     environment:
-      KC_HOSTNAME: localhost
+      KC_HOSTNAME: keycloak
       KC_HOSTNAME_PORT: 8080
       KC_HOSTNAME_STRICT_BACKCHANNEL: false
       KC_HTTP_ENABLED: true
@@ -55,10 +59,17 @@ services:
     restart: always
     depends_on:
       - postgres
+    networks:
+      - subtlesolve-network
 
 volumes:
   postgres_data:
     driver: local
+
+networks:
+  subtlesolve-network:
+    driver: bridge
+
 
   # keycloak:
   #   image: quay.io/keycloak/keycloak:24.0.4
