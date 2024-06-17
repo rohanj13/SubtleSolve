@@ -42,7 +42,7 @@ services:
     command: start
     container_name: "keycloak"
     environment:
-      KC_HOSTNAME: keycloak
+      KC_HOSTNAME: 140.238.195.136
       KC_HOSTNAME_PORT: 8080
       KC_HOSTNAME_STRICT_BACKCHANNEL: false
       KC_HTTP_ENABLED: true
@@ -68,6 +68,7 @@ volumes:
 
 networks:
   subtlesolve-network:
+    name: subtlesolve-network
     driver: bridge
 
 
