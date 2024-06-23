@@ -38,29 +38,32 @@ services:
       - subtlesolve-network
 
   keycloak:
-    image: quay.io/keycloak/keycloak:24.0.0
-    command: start
-    container_name: "keycloak"
-    environment:
-      KC_HOSTNAME: localhost
-      KC_HOSTNAME_PORT: 8080
-      KC_HOSTNAME_STRICT_BACKCHANNEL: false
-      KC_HTTP_ENABLED: true
-      KC_HOSTNAME_STRICT_HTTPS: false
-      KC_HEALTH_ENABLED: true
-      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
-      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
-      KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://postgres/${POSTGRES_DB}
-      KC_DB_USERNAME: ${POSTGRES_USER}
-      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
-    ports:
-      - "8080:8080"
-    restart: always
-    depends_on:
-      - postgres
-    networks:
-      - subtlesolve-network
+  image: quay.io/keycloak/keycloak:20.0.3
+  command: start-dev
+  container_name: "keycloak"
+  environment:
+    KC_HOSTNAME: 140.238.195.136
+    KC_HOSTNAME_PORT: 8080
+    KC_HOSTNAME_STRICT_BACKCHANNEL: false
+    KC_HTTP_ENABLED: true
+    KC_HTTPS_CERTIFICATE_FILE: ""
+    KC_HTTPS_CERTIFICATE_KEY_FILE: ""
+    KC_HOSTNAME_STRICT_HTTPS: false
+    KC_HEALTH_ENABLED: true
+    KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+    KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+    KC_DB: postgres
+    KC_DB_URL: jdbc:postgresql://postgres/${POSTGRES_DB}
+    KC_DB_USERNAME: ${POSTGRES_USER}
+    KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+  ports:
+    - "8080:8080"
+  restart: always
+  depends_on:
+    - postgres
+  networks:
+    - subtlesolve-network
+
 
 volumes:
   postgres_data:
