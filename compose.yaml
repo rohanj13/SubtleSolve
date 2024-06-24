@@ -27,7 +27,7 @@ services:
       - subtlesolve-network
 
   postgres:
-    image: postgres:16.2
+    image: postgres:16.0
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:

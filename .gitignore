@@ -208,6 +208,6 @@ gradle-app.setting
 
 .vscode/
 
-db-data/
+
 sql/
 # End of https://www.toptal.com/developers/gitignore/api/gradle,java,react,node
