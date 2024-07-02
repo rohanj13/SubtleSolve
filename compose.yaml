@@ -31,29 +31,31 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: keycloak_db
+      POSTGRES_USER: keycloak_db_user
+      POSTGRES_PASSWORD: password
     networks:
       - subtlesolve-network
 
   keycloak:
-    image: quay.io/keycloak/keycloak:20.0.3
+    image: quay.io/keycloak/keycloak:24.0.4
     command: start-dev
     container_name: "keycloak"
     environment:
-      KC_HOSTNAME: keycloak
+      KC_HOSTNAME: localhost
       KC_HOSTNAME_PORT: 8080
       KC_HOSTNAME_STRICT_BACKCHANNEL: "false"
       KC_HTTP_ENABLED: "true"
       KC_HOSTNAME_STRICT_HTTPS: "false"
       KC_HEALTH_ENABLED: "true"
-      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
-      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
-      KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://postgres/${POSTGRES_DB}
-      KC_DB_USERNAME: ${POSTGRES_USER}
-      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_DATABASE: keycloak_db
+      DB_USER: keycloak_db_user
+      DB_SCHEMA: public
+      DB_PASSWORD: password
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
     ports:
       - "8080:8080"
     restart: always
@@ -61,16 +63,6 @@ services:
       - postgres
     networks:
       - subtlesolve-network
-
-
-volumes:
-  postgres_data:
-    driver: local
-
-networks:
-  subtlesolve-network:
-    name: subtlesolve-network
-    driver: bridge
 
 
   # keycloak:
@@ -82,7 +74,7 @@ networks:
   #     DB_ADDR: database
   #     DB_PORT: 5432
   #     DB_SCHEMA: public
-  #     DB_DATABASE: ${DB_DATABASE}
+  #     DB_DATABASE: "keycloak_db"
   #     DB_USER: ${DB_USER}
   #     DB_PASSWORD: ${DB_PASSWORD}
   #     KEYCLOAK_USER: ${KEYCLOAK_USER}
@@ -99,6 +91,8 @@ networks:
   #   restart: always
   #   links: 
   #     - postgresql
+  #   networks:
+  #     - subtlesolve-network
 
   # postgresql:
   #   image: postgres:14
@@ -123,6 +117,8 @@ networks:
   #     # - ./sql/client.sql:/docker-entrypoint-initdb.d/E.sql
   #   ports: 
   #     - "5439:5432"
+  #   networks:
+  #     - subtlesolve-network
 #   mongodb:
 #     image: mongodb/mongodb-community-server:latest
 #     ports:
@@ -134,5 +130,11 @@ networks:
 #       - MONGODB_INITDB_ROOT_PASSWORD=example
 #       - MONGO_INITDB_DATABASE=subtlesolvedb
 
-# volumes:
-#   subtlesolve_data:
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  subtlesolve-network:
+    name: subtlesolve-network
+    driver: bridge
