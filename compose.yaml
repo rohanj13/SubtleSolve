@@ -12,19 +12,19 @@ services:
     image: rohanj13/subtlesolverepo:react-app-${TAG}
     build: ./subtlesolve_frontend
     container_name: "subtlesolve-fe"
-    # depends_on:
-    #   - subtlesolve-be
+    depends_on:
+      - subtlesolve-be
     networks:
       - subtlesolve-network
 
-  # subtlesolve-be:
-  #   build: ./backend
-  #   container_name: "subtlesolve-be"
-  #   depends_on:
-  #     - postgres
-  #     - keycloak
-  #   networks:
-  #     - subtlesolve-network
+  subtlesolve-be:
+    build: ./backend
+    container_name: "subtlesolve-be"
+    depends_on:
+      - postgres
+      - keycloak
+    networks:
+      - subtlesolve-network
 
   postgres:
     image: postgres:16.0
