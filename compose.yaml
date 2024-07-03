@@ -46,7 +46,7 @@ services:
     command: start --optimized
     container_name: "keycloak"
     environment:
-      KC_HOSTNAME: ss_keycloak
+      KC_HOSTNAME: subtlesolve.org
       KC_HOSTNAME_PORT: 8443
       KC_HTTPS_PORT: 8443
       KC_HTTP_PORT: 8080
