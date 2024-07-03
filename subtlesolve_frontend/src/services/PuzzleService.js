@@ -76,7 +76,11 @@ function updateScore(gameID, score, token) {
 // -- Axios
 
 const instance = axios.create({
-  baseURL: "/api"
+  baseURL: "http://localhost:8081/api",
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
+  },
 })
 
 instance.interceptors.response.use(response => {
