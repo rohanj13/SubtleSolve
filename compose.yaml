@@ -9,73 +9,80 @@ services:
     networks:
       - subtlesolve-network
     volumes:
-      - ./etc/ssl/cert.pem:/etc/nginx/ssl/cert.pem:ro
-      - ./etc/ssl/key.pem:/etc/nginx/ssl/key.pem:ro
-  
-  subtlesolve-fe:
-    image: rohanj13/subtlesolverepo:react-app-${TAG}
-    build: ./subtlesolve_frontend
-    container_name: "subtlesolve-fe"
+      - web-root:/usr/share/nginx/html
+      - ./nginx_container/:/etc/nginx/conf.d
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
     depends_on:
-      - subtlesolve-be
-    networks:
-      - subtlesolve-network
+      # - certbot
+      # - subtlesolve-fe
+      # - subtlesolve-be
 
-  subtlesolve-be:
-    build: ./backend
-    container_name: "subtlesolve-be"
-    depends_on:
-      - postgres
-      - keycloak
-    networks:
-      - subtlesolve-network
+  # certbot:
+  #   image: certbot/certbot
+  #   container_name: certbot
+  #   volumes:
+  #     - web-root:/usr/share/nginx/html
+  #     - certbot-etc:/etc/letsencrypt
+  #     - certbot-var:/var/lib/letsencrypt
+  #   command: certonly --webroot --webroot-path=/usr/share/nginx/html  --email subtlesolve@gmail.com --agree-tos --no-eff-email --staging -d subtlesolve.org  -d www.subtlesolve.org
+
+  # subtlesolve-fe:
+  #   image: rohanj13/subtlesolverepo:react-app-${TAG}
+  #   build: ./subtlesolve_frontend
+  #   container_name: "subtlesolve-fe"
+  #   depends_on:
+  #     - subtlesolve-be
+  #   networks:
+  #     - subtlesolve-network
+
+  # subtlesolve-be:
+  #   build: ./backend
+  #   container_name: "subtlesolve-be"
+  #   depends_on:
+  #     - postgres
+  #     - keycloak
+  #   networks:
+  #     - subtlesolve-network
 
   postgres:
-    image: postgres:16.0
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: keycloak_db
-      POSTGRES_USER: keycloak_db_user
-      POSTGRES_PASSWORD: password
-    networks:
-      - subtlesolve-network
+      image: postgres:16.0
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_DB: keycloak_db
+        POSTGRES_USER: keycloak_db_user
+        POSTGRES_PASSWORD: password
+      networks:
+        - subtlesolve-network
 
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.4
     command: start --optimized
-    container_name: "keycloak"
+    container_name: keycloak
     environment:
-      KC_HOSTNAME: subtlesolve.org
-      KC_HOSTNAME_PORT: 8443
-      KC_HTTPS_PORT: 8443
-      KC_HTTP_PORT: 8080
-      KC_HTTPS_CERTIFICATE_FILE: "/etc/x509/https/cert.pem"
-      KC_HTTPS_CERTIFICATE_KEY_FILE: "/etc/x509/https/key.pem"
-      KC_HEALTH_ENABLED: "true"
-      KC_METRICS_ENABLED: "true"
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: keycloak_db
-      DB_USER: keycloak_db_user
-      DB_SCHEMA: public
-      DB_PASSWORD: password
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-    volumes:
-      - ./etc/ssl/cert.pem:/etc/x509/https/cert.pem:ro
-      - ./etc/ssl/key.pem:/etc/x509/https/key.pem:ro
+      - DB_VENDOR=postgres
+      - DB_ADDR=postgres
+      - DB_DATABASE=keycloak
+      - DB_USER=keycloak
+      - DB_PASSWORD=keycloak
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
     depends_on:
       - postgres
+    # volumes:
+    #   - certbot-etc:/etc/letsencrypt
     ports:
       - "8080:8080"
-      - "8443:8443"
+      # - "8443:8443"
     networks:
       - subtlesolve-network
-
 volumes:
   postgres_data:
     driver: local
+  certbot-etc:
+  certbot-var:
+  web-root:
 
 networks:
   subtlesolve-network:
