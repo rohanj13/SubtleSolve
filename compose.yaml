@@ -31,19 +31,19 @@ services:
     image: rohanj13/subtlesolverepo:react-app-${TAG}
     build: ./subtlesolve_frontend
     container_name: "subtlesolve-fe"
-    depends_on:
-      - subtlesolve-be
+    # depends_on:
+    #   - subtlesolve-be
     networks:
       - subtlesolve-network
 
-  subtlesolve-be:
-    build: ./backend
-    container_name: "subtlesolve-be"
-    depends_on:
-      - postgres
-      - keycloak_container
-    networks:
-      - subtlesolve-network
+  # subtlesolve-be:
+  #   build: ./backend
+  #   container_name: "subtlesolve-be"
+  #   depends_on:
+  #     - postgres
+  #     - keycloak_container
+  #   networks:
+  #     - subtlesolve-network
 
   postgres:
       image: postgres:16.0
@@ -71,8 +71,8 @@ services:
       KC_DB_PASSWORD: password
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: password
-      KC_HOSTNAME_ADMIN_URL: https://www.subtlesolve.org/auth
-      KC_HOSTNAME_URL: https://www.subtlesolve.org/auth
+      KC_HOSTNAME_ADMIN_URL: https://www.subtlesolve.org
+      KC_HOSTNAME_URL: https://www.subtlesolve.org
       KC_PROXY: edge
     depends_on:
       - postgres
