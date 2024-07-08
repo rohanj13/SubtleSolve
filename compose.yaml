@@ -51,23 +51,27 @@ services:
         - postgres_data:/var/lib/postgresql/data
       environment:
         POSTGRES_DB: keycloak_db
-        POSTGRES_USER: keycloak_db_user
+        POSTGRES_USER: admin
         POSTGRES_PASSWORD: password
       networks:
         - subtlesolve-network
 
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.4
-    command: start --optimized
+    command: start
     container_name: keycloak
     environment:
-      - DB_VENDOR=postgres
-      - DB_ADDR=postgres
-      - DB_DATABASE=keycloak
-      - DB_USER=keycloak
-      - DB_PASSWORD=keycloak
-      - KEYCLOAK_USER=admin
-      - KEYCLOAK_PASSWORD=admin
+      KC_PROXY_ADDRESS_FORWARDING: "true"
+      KC_HOSTNAME_STRICT: "false"
+      KC_HOSTNAME: auth.
+      KC_PROXY: edge
+      KC_HTTP_ENABLED: "true"
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak_db?ssl=allow
+      KC_DB_USERNAME: admin
+      KC_DB_PASSWORD: password
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: password
     depends_on:
       - postgres
     # volumes:
