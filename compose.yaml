@@ -46,7 +46,7 @@ services:
   #     - subtlesolve-network
 
   postgres:
-      image: postgres:16.0
+      image: postgres:14.2
       volumes:
         - postgres_data:/var/lib/postgresql/data
       environment:
@@ -56,14 +56,13 @@ services:
       networks:
         - subtlesolve-network
 
-  keycloak:
-    image: quay.io/keycloak/keycloak:24.0.4
+  keycloak_container:
+    image: quay.io/keycloak/keycloak:20.0.0
     command: start-dev
-    container_name: keycloak
     environment:
-      KC_PROXY_ADDRESS_FORWARDING: "true"
-      KC_PROXY_HEADERS: xforwarded
-      KC_HOSTNAME_STRICT: "false"
+      # KC_PROXY_ADDRESS_FORWARDING: "true"
+      # KC_PROXY_HEADERS: xforwarded
+      # KC_HOSTNAME_STRICT: "false"
       # KC_HOSTNAME: auth.subtlesolve.org
       KC_HTTP_ENABLED: "true"
       KC_DB: postgres
@@ -72,6 +71,9 @@ services:
       KC_DB_PASSWORD: password
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: password
+      KC_HOSTNAME_ADMIN_URL: https://www.subtlesolve.org
+      KC_HOSTNAME_URL: https://www.subtlesolve.org
+      KC_PROXY: edge
     depends_on:
       - postgres
     # volumes:
