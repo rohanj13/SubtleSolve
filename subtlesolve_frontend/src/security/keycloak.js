@@ -1,6 +1,6 @@
 import Keycloak from 'keycloak-js'
 const keycloakConfig = {
-  url: 'http://keycloak_container:8080', 
+  url: 'https://www.subtlesolve.org/auth', 
   realm: 'SubtleSolveAuth', 
   clientId: 'subtle-solve-auth'
 }

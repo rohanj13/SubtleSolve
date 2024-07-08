@@ -14,7 +14,7 @@ services:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
     depends_on:
-      - certbot
+      # - certbot
       - subtlesolve-fe
       - subtlesolve-be
 
@@ -41,7 +41,7 @@ services:
     container_name: "subtlesolve-be"
     depends_on:
       - postgres
-      - keycloak
+      - keycloak_container
     networks:
       - subtlesolve-network
 
@@ -71,8 +71,8 @@ services:
       KC_DB_PASSWORD: password
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: password
-      KC_HOSTNAME_ADMIN_URL: https://www.subtlesolve.org
-      KC_HOSTNAME_URL: https://www.subtlesolve.org
+      KC_HOSTNAME_ADMIN_URL: https://www.subtlesolve.org/auth
+      KC_HOSTNAME_URL: https://www.subtlesolve.org/auth
       KC_PROXY: edge
     depends_on:
       - postgres
@@ -80,7 +80,7 @@ services:
     #   - certbot-etc:/etc/letsencrypt
     ports:
       - "8080:8080"
-      # - "8443:8443"
+      - "8443:8443"
     networks:
       - subtlesolve-network
 volumes:
