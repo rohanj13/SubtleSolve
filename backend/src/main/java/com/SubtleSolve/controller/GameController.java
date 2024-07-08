@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.SubtleSolve.service.PuzzleService;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://www.subtlesolve.org")
 public class GameController {
     @Autowired
     private PuzzleService puzzleService;
