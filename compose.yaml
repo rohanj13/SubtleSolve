@@ -13,7 +13,7 @@ services:
       - ./nginx_container/:/etc/nginx/conf.d
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
-    depends_on:
+    # depends_on:
       # - certbot
       # - subtlesolve-fe
       # - subtlesolve-be
@@ -51,24 +51,24 @@ services:
         - postgres_data:/var/lib/postgresql/data
       environment:
         POSTGRES_DB: keycloak_db
-        POSTGRES_USER: admin
+        POSTGRES_USER: keycloak_db_user
         POSTGRES_PASSWORD: password
       networks:
         - subtlesolve-network
 
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.4
-    command: start
+    command: start-dev
     container_name: keycloak
     environment:
       KC_PROXY_ADDRESS_FORWARDING: "true"
+      KC_PROXY_HEADERS: xforwarded
       KC_HOSTNAME_STRICT: "false"
-      KC_HOSTNAME: auth.
-      KC_PROXY: edge
+      # KC_HOSTNAME: auth.subtlesolve.org
       KC_HTTP_ENABLED: "true"
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak_db?ssl=allow
-      KC_DB_USERNAME: admin
+      KC_DB_USERNAME: keycloak_db_user
       KC_DB_PASSWORD: password
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: password
