@@ -13,10 +13,10 @@ services:
       - ./nginx_container/:/etc/nginx/conf.d
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
-    # depends_on:
-      # - certbot
-      # - subtlesolve-fe
-      # - subtlesolve-be
+    depends_on:
+      - certbot
+      - subtlesolve-fe
+      - subtlesolve-be
 
   # certbot:
   #   image: certbot/certbot
@@ -27,26 +27,26 @@ services:
   #     - certbot-var:/var/lib/letsencrypt
   #   command: certonly --webroot --webroot-path=/usr/share/nginx/html  --email subtlesolve@gmail.com --agree-tos --no-eff-email --staging -d subtlesolve.org  -d www.subtlesolve.org
 
-  # subtlesolve-fe:
-  #   image: rohanj13/subtlesolverepo:react-app-${TAG}
-  #   build: ./subtlesolve_frontend
-  #   container_name: "subtlesolve-fe"
-  #   depends_on:
-  #     - subtlesolve-be
-  #   networks:
-  #     - subtlesolve-network
+  subtlesolve-fe:
+    image: rohanj13/subtlesolverepo:react-app-${TAG}
+    build: ./subtlesolve_frontend
+    container_name: "subtlesolve-fe"
+    depends_on:
+      - subtlesolve-be
+    networks:
+      - subtlesolve-network
 
-  # subtlesolve-be:
-  #   build: ./backend
-  #   container_name: "subtlesolve-be"
-  #   depends_on:
-  #     - postgres
-  #     - keycloak
-  #   networks:
-  #     - subtlesolve-network
+  subtlesolve-be:
+    build: ./backend
+    container_name: "subtlesolve-be"
+    depends_on:
+      - postgres
+      - keycloak
+    networks:
+      - subtlesolve-network
 
   postgres:
-      image: postgres:14.2
+      image: postgres:16.0
       volumes:
         - postgres_data:/var/lib/postgresql/data
       environment:
@@ -57,7 +57,7 @@ services:
         - subtlesolve-network
 
   keycloak_container:
-    image: quay.io/keycloak/keycloak:20.0.0
+    image: quay.io/keycloak/keycloak:24.0.4
     command: start-dev
     environment:
       # KC_PROXY_ADDRESS_FORWARDING: "true"
