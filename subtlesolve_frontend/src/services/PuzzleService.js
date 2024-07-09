@@ -76,7 +76,7 @@ function updateScore(gameID, score, token) {
 // -- Axios
 
 const instance = axios.create({
-  baseURL: "https://subtlesolve.org/api"
+  baseURL: "https://www.subtlesolve.org/api"
 })
 
 instance.interceptors.response.use(response => {
