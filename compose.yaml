@@ -13,10 +13,10 @@ services:
       - ./nginx_container/:/etc/nginx/conf.d
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
-    # depends_on:
+    depends_on:
       # - certbot
-      #- subtlesolve-fe
-      #- subtlesolve-be
+      - subtlesolve-fe
+      - subtlesolve-be
 
   # certbot:
   #   image: certbot/certbot
@@ -27,23 +27,23 @@ services:
   #     - certbot-var:/var/lib/letsencrypt
   #   command: certonly --webroot --webroot-path=/usr/share/nginx/html  --email subtlesolve@gmail.com --agree-tos --no-eff-email -d subtlesolve.org  -d www.subtlesolve.org -d auth.subtlesolve.org --force-renew
 
-  # subtlesolve-fe:
-  #   image: rohanj13/subtlesolverepo:react-app-${TAG}
-  #   build: ./subtlesolve_frontend
-  #   container_name: "subtlesolve-fe"
-  #   depends_on:
-  #     - subtlesolve-be
-  #   networks:
-  #     - subtlesolve-network
+  subtlesolve-fe:
+    image: rohanj13/subtlesolverepo:react-app-${TAG}
+    build: ./subtlesolve_frontend
+    container_name: "subtlesolve-fe"
+    depends_on:
+      - subtlesolve-be
+    networks:
+      - subtlesolve-network
 
-  # subtlesolve-be:
-  #   build: ./backend
-  #   container_name: "subtlesolve-be"
-  #   depends_on:
-  #     - postgres
-  #     - keycloak_container
-  #   networks:
-  #     - subtlesolve-network
+  subtlesolve-be:
+    build: ./backend
+    container_name: "subtlesolve-be"
+    depends_on:
+      - postgres
+      - keycloak_container
+    networks:
+      - subtlesolve-network
 
   postgres:
       image: postgres:16.0
@@ -71,8 +71,8 @@ services:
       KC_DB_PASSWORD: password
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: password
-      KC_HOSTNAME_ADMIN_URL: https://auth.subtlesolve.org
-      KC_HOSTNAME_URL: https://auth.subtlesolve.org
+      KC_HOSTNAME_ADMIN_URL: https://www.subtlesolve.org
+      KC_HOSTNAME_URL: https://www.subtlesolve.org
       KC_PROXY: edge
     depends_on:
       - postgres
