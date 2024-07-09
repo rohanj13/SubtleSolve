@@ -71,8 +71,8 @@ services:
       KC_DB_PASSWORD: password
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: password
-      KC_HOSTNAME_ADMIN_URL: https://www.subtlesolve.org
-      KC_HOSTNAME_URL: https://www.subtlesolve.org
+      KC_HOSTNAME_ADMIN_URL: https://auth.subtlesolve.org
+      KC_HOSTNAME_URL: https://auth.subtlesolve.org
       KC_PROXY: edge
     depends_on:
       - postgres
