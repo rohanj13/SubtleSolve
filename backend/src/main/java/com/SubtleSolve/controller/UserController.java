@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import com.SubtleSolve.service.UserServiceImpl;
 
 @RestController
-@CrossOrigin(origins = "https://www.subtlesolve.org")
+@CrossOrigin
 @RequestMapping("/api/user")
 public class UserController {
 
