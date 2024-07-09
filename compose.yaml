@@ -14,83 +14,83 @@ services:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
     depends_on:
-      - certbot
+      # - certbot
       - subtlesolve-fe
       - subtlesolve-be
 
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    volumes:
-      - web-root:/usr/share/nginx/html
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-    command: certonly --webroot --webroot-path=/usr/share/nginx/html  --email subtlesolve@gmail.com --agree-tos --no-eff-email -d subtlesolve.org  -d www.subtlesolve.org -d auth.subtlesolve.org --force-renew
+  # certbot:
+  #   image: certbot/certbot
+  #   container_name: certbot
+  #   volumes:
+  #     - web-root:/usr/share/nginx/html
+  #     - certbot-etc:/etc/letsencrypt
+  #     - certbot-var:/var/lib/letsencrypt
+  #   command: certonly --webroot --webroot-path=/usr/share/nginx/html  --email subtlesolve@gmail.com --agree-tos --no-eff-email -d subtlesolve.org  -d www.subtlesolve.org -d auth.subtlesolve.org --force-renew
 
-#   subtlesolve-fe:
-#     image: rohanj13/subtlesolverepo:react-app-${TAG}
-#     build: ./subtlesolve_frontend
-#     container_name: "subtlesolve-fe"
-#     depends_on:
-#       - subtlesolve-be
-#     networks:
-#       - subtlesolve-network
+  subtlesolve-fe:
+    image: rohanj13/subtlesolverepo:react-app-${TAG}
+    build: ./subtlesolve_frontend
+    container_name: "subtlesolve-fe"
+    depends_on:
+      - subtlesolve-be
+    networks:
+      - subtlesolve-network
 
-#   subtlesolve-be:
-#     build: ./backend
-#     container_name: "subtlesolve-be"
-#     depends_on:
-#       - postgres
-#       - keycloak_container
-#     networks:
-#       - subtlesolve-network
+  subtlesolve-be:
+    build: ./backend
+    container_name: "subtlesolve-be"
+    depends_on:
+      - postgres
+      - keycloak_container
+    networks:
+      - subtlesolve-network
 
-#   postgres:
-#       image: postgres:16.0
-#       volumes:
-#         - postgres_data:/var/lib/postgresql/data
-#       environment:
-#         POSTGRES_DB: keycloak_db
-#         POSTGRES_USER: keycloak_db_user
-#         POSTGRES_PASSWORD: password
-#       networks:
-#         - subtlesolve-network
+  postgres:
+      image: postgres:16.0
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_DB: keycloak_db
+        POSTGRES_USER: keycloak_db_user
+        POSTGRES_PASSWORD: password
+      networks:
+        - subtlesolve-network
 
-#   keycloak_container:
-#     image: quay.io/keycloak/keycloak:24.0.4
-#     command: start-dev
-#     environment:
-#       # KC_PROXY_ADDRESS_FORWARDING: "true"
-#       # KC_PROXY_HEADERS: xforwarded
-#       # KC_HOSTNAME_STRICT: "false"
-#       # KC_HOSTNAME: auth.subtlesolve.org
-#       KC_HTTP_ENABLED: "true"
-#       KC_DB: postgres
-#       KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak_db?ssl=allow
-#       KC_DB_USERNAME: keycloak_db_user
-#       KC_DB_PASSWORD: password
-#       KEYCLOAK_ADMIN: admin
-#       KEYCLOAK_ADMIN_PASSWORD: password
-#       KC_HOSTNAME_ADMIN_URL: https://www.subtlesolve.org
-#       KC_HOSTNAME_URL: https://www.subtlesolve.org
-#       KC_PROXY: edge
-#     depends_on:
-#       - postgres
-#     # volumes:
-#     #   - certbot-etc:/etc/letsencrypt
-#     ports:
-#       - "8080:8080"
-#       - "8443:8443"
-#     networks:
-#       - subtlesolve-network
-# volumes:
-#   postgres_data:
-#     driver: local
-#   certbot-etc:
-#   certbot-var:
-#   web-root:
+  keycloak_container:
+    image: quay.io/keycloak/keycloak:24.0.4
+    command: start-dev
+    environment:
+      # KC_PROXY_ADDRESS_FORWARDING: "true"
+      # KC_PROXY_HEADERS: xforwarded
+      # KC_HOSTNAME_STRICT: "false"
+      # KC_HOSTNAME: auth.subtlesolve.org
+      KC_HTTP_ENABLED: "true"
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak_db?ssl=allow
+      KC_DB_USERNAME: keycloak_db_user
+      KC_DB_PASSWORD: password
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: password
+      KC_HOSTNAME_ADMIN_URL: https://www.subtlesolve.org
+      KC_HOSTNAME_URL: https://www.subtlesolve.org
+      KC_PROXY: edge
+    depends_on:
+      - postgres
+    # volumes:
+    #   - certbot-etc:/etc/letsencrypt
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    networks:
+      - subtlesolve-network
+volumes:
+  postgres_data:
+    driver: local
+  certbot-etc:
+  certbot-var:
+  web-root:
 
-# networks:
-#   subtlesolve-network:
-#     name: subtlesolve-network
-#     driver: bridge
+networks:
+  subtlesolve-network:
+    name: subtlesolve-network
+    driver: bridge
