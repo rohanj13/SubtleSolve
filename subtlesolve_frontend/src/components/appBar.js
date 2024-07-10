@@ -111,7 +111,7 @@ export default function ButtonAppBar() {
           {/* <Typography variant="h4" component="div" sx={{ display: 'flex', textAlign: 'center' }}>
             SubtleSolve
           </Typography> */}
-          <img src="/SubtleSolveLogoSmall.png" alt="SubtleSolve Logo" style={{ width: '200px', height: 'auto' }} />
+          <img src="/SubtleSolveLogoSmall.png" alt="SubtleSolve Logo" style={{ width: 'auto', height: 'auto' }} />
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
             {!keycloak.authenticated && (
               <Button color="inherit" sx={{ display: 'flex', marginRight: -2 }} onClick={() => keycloak.login()}>Login</Button>
