@@ -11,6 +11,7 @@ import { useKeycloak } from '@react-keycloak/web';
 import Avatar from '@mui/material/Avatar';
 import InstructionsDialog from './InstructionDialog';
 import StatsDialog from './StatsDialog';
+import { PuzzleService } from '../services/PuzzleService';
 
 export default function ButtonAppBar() {
   const { keycloak } = useKeycloak();
