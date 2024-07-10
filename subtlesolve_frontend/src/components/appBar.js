@@ -28,8 +28,7 @@ export default function ButtonAppBar() {
 
   const handleStatsClick = async () => {
     if (!keycloak.authenticated) {
-      setOpenStats(true);
-      // alert('Please Log in to see and record your stats');
+      alert('Please Log in to see and record your stats');
     } else {
       try {
         const response = await PuzzleService.getStats(keycloak.token);
