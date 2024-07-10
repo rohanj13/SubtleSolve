@@ -6,48 +6,35 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import SettingsIcon from '@mui/icons-material/Settings';
 import InfoIcon from '@mui/icons-material/Info';
 import { useKeycloak } from '@react-keycloak/web';
-import { PuzzleService } from '../services/PuzzleService';
 import Avatar from '@mui/material/Avatar';
 import InstructionsDialog from './InstructionDialog';
 import StatsDialog from './StatsDialog';
 
 export default function ButtonAppBar() {
-  const { keycloak, initialized } = useKeycloak();
+  const { keycloak } = useKeycloak();
   const [openStats, setOpenStats] = React.useState(false);
-  var [name, setName] = React.useState("User Name");
+  const [name, setName] = React.useState("");
   const [statsData, setStatsData] = React.useState({});
   const [openInstructions, setOpenInstructions] = React.useState(false);
-  // const [response, setResponse] = React.useState()
 
   React.useEffect(() => {
-    if (!!keycloak.authenticated) {
-      const fullname = keycloak.tokenParsed.name;
-      
+    if (!!keycloak.authenticated && keycloak.tokenParsed) {
+      const fullname = keycloak.tokenParsed.name || "Unknown User";
       setName(fullname);
-      console.log(fullname);
     }
-  }, []);
-
-  // const handleAvatar = () => {
-  //   if (!!keycloak.authenticated) {
-  //     const fullname = keycloak.tokenParsed.name;
-  //     setName(fullname);
-  //   }
-  // };
+  }, [keycloak.authenticated, keycloak.tokenParsed]);
 
   const handleStatsClick = async () => {
     if (!keycloak.authenticated) {
-      alert('Please Log in to see and record your stats');
+      setOpenStats(true);
+      // alert('Please Log in to see and record your stats');
     } else {
-      // console.log(keycloak.tokenParsed.name);
       try {
         const response = await PuzzleService.getStats(keycloak.token);
-        // const { guessList, ...rest } = response.data;
-         setStatsData(response.data);
-         setOpenStats(true);
+        setStatsData(response.data);
+        setOpenStats(true);
       } catch (error) {
         console.error('Error fetching stats:', error);
       }
@@ -68,30 +55,24 @@ export default function ButtonAppBar() {
 
   function stringToColor(string) {
     let hash = 0;
-    let i;
-  
-    /* eslint-disable no-bitwise */
-    for (i = 0; i < string.length; i += 1) {
+    for (let i = 0; i < string.length; i += 1) {
       hash = string.charCodeAt(i) + ((hash << 5) - hash);
     }
-  
     let color = '#';
-  
-    for (i = 0; i < 3; i += 1) {
+    for (let i = 0; i < 3; i += 1) {
       const value = (hash >> (i * 8)) & 0xff;
       color += `00${value.toString(16)}`.slice(-2);
     }
-    /* eslint-enable no-bitwise */
-  
     return color;
   }
 
   function stringAvatar(name) {
+    const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
     return {
       sx: {
         bgcolor: stringToColor(name),
       },
-      children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+      children: initials,
     };
   }
 
@@ -111,22 +92,15 @@ export default function ButtonAppBar() {
           <Typography variant="h5" component="div" sx={{ display: 'flex', textAlign: 'center' }}>
             SubtleSolve
           </Typography>
-          {/* <img src="/SubtleSolveLogoSmall.png" alt="SubtleSolve Logo" style={{ width: 'auto', height: 'auto' }} /> */}
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
             {!keycloak.authenticated && (
               <Button color="inherit" sx={{ display: 'flex', marginRight: -2 }} onClick={() => keycloak.login()}>Login</Button>
             )}
             {!!keycloak.authenticated && (
-              <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Button color="inherit" sx={{ display: 'flex', marginRight: 2 }} onClick={() => keycloak.logout()}>Logout</Button>
-              <Avatar {...stringAvatar(name)} />
-            </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Button color="inherit" sx={{ display: 'flex', marginRight: 2 }} onClick={() => keycloak.logout()}>Logout</Button>
+                <Avatar {...stringAvatar(name)} />
+              </Box>
             )}
           </Box>
         </Toolbar>
