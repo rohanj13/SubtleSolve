@@ -32,9 +32,9 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**").allowedOrigins("*")
-                        .allowedMethods("https://auth.subtlesolve.org", "https://www.subtlesolve.org")
-                        .allowCredentials(true);
+                registry.addMapping("/api/**")
+                        .allowedOrigins("https://auth.subtlesolve.org", "https://www.subtlesolve.org")
+                        .allowedMethods("*").allowCredentials(true);
             }
         };
     }
