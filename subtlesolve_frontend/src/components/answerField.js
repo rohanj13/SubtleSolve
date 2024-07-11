@@ -9,6 +9,7 @@ import LinearWithValueLabel from './progressBar';
 import { useKeycloak } from '@react-keycloak/web';
 import { PuzzleService } from '../services/PuzzleService';
 import StatsDialog from './StatsDialog';
+import stringSimilarity from 'string-similarity';
 
 export default function AnswerField({ category, answer, onSubmit, gameID, guessList }) {
   const { keycloak, initialized } = useKeycloak();
@@ -21,6 +22,20 @@ export default function AnswerField({ category, answer, onSubmit, gameID, guessL
   React.useEffect(() => {
     setScore(6 - guessList.length);
   }, [guessList]);
+
+  const normalizeString = (str) => {
+    return str
+      .toLowerCase()
+      .replace(/[\s\W_]+/g, ''); // Remove spaces, punctuation, and special characters
+  };
+
+  const checkAnswer = (userAnswer, correctAnswer) => {
+    const normalizedUserAnswer = normalizeString(userAnswer);
+    const normalizedCorrectAnswer = normalizeString(correctAnswer);
+
+    const similarity = stringSimilarity.compareTwoStrings(normalizedUserAnswer, normalizedCorrectAnswer);
+    return similarity >= 0.85; // Adjust the threshold as needed
+  };
 
   const handleSubmit = async () => {
     const newList = guessList.concat(guess);
@@ -35,7 +50,7 @@ export default function AnswerField({ category, answer, onSubmit, gameID, guessL
           await PuzzleService.updateGameplay(gameID, guess, keycloak.token);
         }
 
-        if (guess === answer || newList.length === 6) {
+        if (checkAnswer(guess, answer) || newList.length === 6) { // Updated condition
           await PuzzleService.updateScore(gameID, tempScore, keycloak.token);
           const response = await PuzzleService.getStats(keycloak.token);
           setStatsData(response.data);
@@ -54,7 +69,7 @@ export default function AnswerField({ category, answer, onSubmit, gameID, guessL
     setOpenStatsAnswer(false);
   };
 
-  const hasGuessedCorrectly = guessList.includes(answer);
+  const hasGuessedCorrectly = guessList.some((guessItem) => checkAnswer(guessItem, answer)); // Updated condition
   const hasExhaustedGuesses = guessList.length >= 6;
 
   return (
@@ -65,7 +80,7 @@ export default function AnswerField({ category, answer, onSubmit, gameID, guessL
             key={index}
             label={guessItem}
             sx={{ margin: 5, borderRadius: '4px' }}
-            color={guessItem === answer ? 'success' : 'error'}
+            color={checkAnswer(guessItem, answer) ? 'success' : 'error'} // Updated condition
           />
         ))}
       </Stack>
