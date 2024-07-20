@@ -5,7 +5,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import './clueList.css';
-import stringSimilarity from 'string-similarity';
+
 
 const style = {
   p: 0,
@@ -23,19 +23,19 @@ const style = {
 //   visibility: 'visible',
 // };
 
-const normalizeString = (str) => {
-  return str
-    .toLowerCase()
-    .replace(/[\s\W_]+/g, ''); // Remove spaces, punctuation, and special characters
-};
+// const normalizeString = (str) => {
+//   return str
+//     .toLowerCase()
+//     .replace(/[\s\W_]+/g, ''); // Remove spaces, punctuation, and special characters
+// };
 
-const checkAnswer = (userAnswer, correctAnswer) => {
-  const normalizedUserAnswer = normalizeString(userAnswer);
-  const normalizedCorrectAnswer = normalizeString(correctAnswer);
+// const checkAnswer = (userAnswer, correctAnswer) => {
+//   const normalizedUserAnswer = normalizeString(userAnswer);
+//   const normalizedCorrectAnswer = normalizeString(correctAnswer);
 
-  const similarity = stringSimilarity.compareTwoStrings(normalizedUserAnswer, normalizedCorrectAnswer);
-  return similarity >= 0.6; // Adjust the threshold as needed
-};
+//   const similarity = stringSimilarity.compareTwoStrings(normalizedUserAnswer, normalizedCorrectAnswer);
+//   return similarity >= 0.6; // Adjust the threshold as needed
+// };
 
 
 export default function ListDividers({ clueList, guessList, answer }) {
@@ -43,7 +43,7 @@ export default function ListDividers({ clueList, guessList, answer }) {
 
   useEffect(() => {
     // Reveal clues based on the number of guesses
-    if (checkAnswer(guessList[guessList.length - 1],answer)) {
+    if (guessList[guessList.length - 1] != answer) {
       const revealedClues = clueList.slice(0, guessList.length);
       setVisibleClues(revealedClues);
     }
