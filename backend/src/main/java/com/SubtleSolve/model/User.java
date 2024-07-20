@@ -94,7 +94,8 @@ public class User {
         if (score != 0) {
             totalWins += 1;
         }
-        this.winPercent = (totalWins / played) * 100;
+        float winPercentage = ((float) totalWins / (float) played) * 100;
+        this.winPercent = (int) winPercentage;
     }
 
     public void setCurrentStreak(int streak) {

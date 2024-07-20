@@ -41,7 +41,7 @@ export default function StatsDialog({ open, handleClose, played, win_percent, cu
     plugins: {
       title: {
         display: true,
-        text: 'Guess Distribution',
+        text: 'Points Distribution',
         font: { size: 16, weight: 'bold' },
         color: '#fff'
       },
@@ -116,9 +116,6 @@ export default function StatsDialog({ open, handleClose, played, win_percent, cu
           </Button>
           <Button variant="contained" onClick={() => handleShare('twitter')} sx={{ margin: 1, backgroundColor: 'black', color: 'white', flex: '1 1 1' }}>
             <TwitterIcon /> SHARE ON X
-          </Button>
-          <Button variant="contained" onClick={() => handleShare('facebook')} sx={{ margin: 1, backgroundColor: 'blue', color: 'white', flex: '1 1 1' }}>
-            <FacebookIcon /> SHARE ON FACEBOOK
           </Button>
         </Box>
       </DialogContent>
