@@ -13,7 +13,7 @@ export const PuzzleService = {
 
 function Getdailypuzzle() {
     var date = new Date();
-    var today = date.toLocaleDateString();
+    var today = date.toLocaleDateString("en-GB");
     //const {data, loading, error} = getrequest("http://localhost:8081/api/dailypuzzle");
     
     return instance.get(`/dailypuzzle`, {

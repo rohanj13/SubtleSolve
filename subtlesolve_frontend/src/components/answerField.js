@@ -34,7 +34,7 @@ export default function AnswerField({ category, answer, onSubmit, gameID, guessL
     const normalizedCorrectAnswer = normalizeString(correctAnswer);
 
     const similarity = stringSimilarity.compareTwoStrings(normalizedUserAnswer, normalizedCorrectAnswer);
-    return similarity >= 0.85; // Adjust the threshold as needed
+    return similarity >= 0.6; // Adjust the threshold as needed
   };
 
   const handleSubmit = async () => {
