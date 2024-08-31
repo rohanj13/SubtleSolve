@@ -10,12 +10,14 @@ import { useKeycloak } from '@react-keycloak/web';
 import { PuzzleService } from '../services/PuzzleService';
 import StatsDialog from './StatsDialog';
 import stringSimilarity from 'string-similarity';
+import Confetti from 'react-confetti';
 
 export default function AnswerField({ category, answer, onSubmit, gameID, guessList }) {
   const { keycloak, initialized } = useKeycloak();
   const [guess, setGuess] = React.useState('');
   const [score, setScore] = React.useState(6);
   const [openStatsAnswer, setOpenStatsAnswer] = React.useState(false);
+  const [showConfetti, setShowConfetti] = React.useState(false); // State to manage confetti
   const remainingGuesses = Math.max(0, 6 - guessList.length);
   const [statsData, setStatsData] = React.useState({});
 
@@ -55,6 +57,11 @@ export default function AnswerField({ category, answer, onSubmit, gameID, guessL
           const response = await PuzzleService.getStats(keycloak.token);
           setStatsData(response.data);
           setOpenStatsAnswer(true);
+
+          if (checkAnswer(guess, answer)) {
+            setShowConfetti(true); // Show confetti when the answer is correct
+            setTimeout(() => setShowConfetti(false), 5000); // Hide confetti after 5 seconds
+          }
         }
       } catch (error) {
         console.error('Error updating gameplay:', error);
@@ -81,6 +88,7 @@ export default function AnswerField({ category, answer, onSubmit, gameID, guessL
 
   return (
     <>
+      {showConfetti && <Confetti />} {/* Render confetti if showConfetti is true */}
       <Stack direction="row" spacing={1} margin={2} sx={{ overflowX: 'auto', maxWidth: '100%', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
         {guessList.map((guessItem, index) => (
           <Chip
