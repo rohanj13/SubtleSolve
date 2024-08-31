@@ -65,6 +65,13 @@ export default function AnswerField({ category, answer, onSubmit, gameID, guessL
     setGuess('');
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); // Prevent the default form submission
+      handleSubmit();
+    }
+  };
+
   const handleCloseStatsAnswer = () => {
     setOpenStatsAnswer(false);
   };
@@ -97,6 +104,7 @@ export default function AnswerField({ category, answer, onSubmit, gameID, guessL
         }}
         noValidate
         autoComplete="on"
+        onKeyPress={handleKeyPress} // Add key press handler to the form
       >
         <TextField
           disabled={hasExhaustedGuesses || hasGuessedCorrectly}
