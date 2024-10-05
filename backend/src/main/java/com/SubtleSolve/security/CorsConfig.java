@@ -19,7 +19,8 @@ public class CorsConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(Arrays.asList("https://auth.subtlesolve.org", "https://www.subtlesolve.org"));
+        configuration.setAllowedOrigins(
+                Arrays.asList("https://auth.subtlesolve.org", "https://www.subtlesolve.org, https://subtlesolve.org"));
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -33,7 +34,8 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("https://auth.subtlesolve.org", "https://www.subtlesolve.org")
+                        .allowedOrigins("https://auth.subtlesolve.org",
+                                "https://www.subtlesolve.org, https://subtlesolve.org")
                         .allowedMethods("*").allowCredentials(true);
             }
         };
