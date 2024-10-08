@@ -1,60 +1,62 @@
-import React, { useRef } from 'react';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import { Box, Typography } from '@mui/material';
+import React from 'react';
+import {
+  Dialog,
+  DialogContent,
+  Card,
+  CardContent,
+  Button,
+  Box,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from '@mui/material';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, BarElement } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import ShareIcon from '@mui/icons-material/Share';
 import TwitterIcon from '@mui/icons-material/X';
-import FacebookIcon from '@mui/icons-material/Facebook';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, BarElement, ChartDataLabels);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
 export default function StatsDialog({ open, handleClose, played, win_percent, currentStreak, bestStreak, scoreDistribution }) {
-  const scores = [];
-  for (var key in scoreDistribution) {
-    scores.push(scoreDistribution[key]);
-  }
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const scores = Object.values(scoreDistribution);
 
   const chartData = {
     labels: ['0', '1', '2', '3', '4', '5'],
-    datasets: [
-      {
-        data: scores,
-        backgroundColor: 'white',
-        borderColor: '#6aaa64',
-        borderWidth: 1,
-      },
-    ],
+    datasets: [{
+      data: scores,
+      backgroundColor: theme.palette.primary.main,
+      borderColor: theme.palette.primary.dark,
+      borderWidth: 1,
+    }],
   };
 
   const options = {
     indexAxis: 'y',
     scales: {
       x: { display: false },
-      y: { display: true },
+      y: { display: true, grid: { display: false } },
     },
     plugins: {
       title: {
         display: true,
         text: 'Points Distribution',
         font: { size: 16, weight: 'bold' },
-        color: '#fff'
+        color: theme.palette.text.primary,
       },
       legend: { display: false },
       datalabels: {
         anchor: 'end',
         align: 'end',
-        color: '#fff',
-        font: { weight: 'bold' }
+        color: theme.palette.text.primary,
+        font: { weight: 'bold' },
       },
     },
     maintainAspectRatio: false,
-    responsive: true
+    responsive: true,
   };
 
   const handleShare = (platform) => {
@@ -63,59 +65,72 @@ export default function StatsDialog({ open, handleClose, played, win_percent, cu
 
     if (platform === 'twitter') {
       window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
-    } else if (platform === 'facebook') {
-      window.open(`https://www.facebook.com/sharer/sharer.php?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
+    } else if (navigator.share) {
+      navigator.share({
+        title: 'SubtleSolve Stats',
+        text: text,
+        url: url,
+      }).catch((error) => console.log('Error sharing', error));
     } else {
-      if (navigator.share) {
-        navigator.share({
-          title: 'SubtleSolve Stats',
-          text: text,
-          url: url,
-        }).then(() => console.log('Successful share'))
-          .catch((error) => console.log('Error sharing', error));
-      } else {
-        alert('Web Share API is not supported in your browser. Copy the text manually:\n\n' + text + '\n' + url);
-      }
+      alert('Web Share API is not supported in your browser. Copy the text manually:\n\n' + text + '\n' + url);
     }
   };
 
-  const commonCardStyles = { width: '100%', backgroundColor: '#1a1a1b', color: '#fff' };
+  const StatItem = ({ value, label }) => (
+    <Box sx={{ flex: '1 1 25%', textAlign: 'center', p: 1 }}>
+      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{value}</Typography>
+      <Typography variant="body2" color="text.secondary">{label}</Typography>
+    </Box>
+  );
 
   return (
-    <Dialog open={open} onClose={handleClose} PaperProps={{ style: { backgroundColor: '#1a1a1b', color: '#fff', width: '80%', maxWidth: 'none' } }}>
-      <DialogContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 2 }}>
-        <Typography variant="h5" sx={{ marginBottom: 2, fontWeight: 'bold', fontFamily: 'sans-serif' }}>SubtleSolve</Typography>
-        <Card sx={{ ...commonCardStyles, marginBottom: 2 }}>
-          <CardContent sx={{ display: 'flex', justifyContent: 'space-around', textAlign: 'center', padding: '5px 0', flexWrap: 'wrap' }}>
-            <Box sx={{ flex: '1 1 25%', textAlign: 'center', padding: '2px' }}>
-              <Typography variant="h6" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{played}</Typography>
-              <Typography variant="body2" sx={{ fontSize: '0.9rem', color: '#878a8c' }}>Played</Typography>
-            </Box>
-            <Box sx={{ flex: '1 1 25%', textAlign: 'center', padding: '2px' }}>
-              <Typography variant="h6" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{win_percent}</Typography>
-              <Typography variant="body2" sx={{ fontSize: '0.9rem', color: '#878a8c' }}>Win %</Typography>
-            </Box>
-            <Box sx={{ flex: '1 1 25%', textAlign: 'center', padding: '2px' }}>
-              <Typography variant="h6" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{currentStreak}</Typography>
-              <Typography variant="body2" sx={{ fontSize: '0.9rem', color: '#878a8c' }}>Current Streak</Typography>
-            </Box>
-            <Box sx={{ flex: '1 1 25%', textAlign: 'center', padding: '2px' }}>
-              <Typography variant="h6" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{bestStreak}</Typography>
-              <Typography variant="body2" sx={{ fontSize: '0.9rem', color: '#878a8c' }}>Max Streak</Typography>
-            </Box>
+    <Dialog 
+      open={open} 
+      onClose={handleClose} 
+      fullWidth 
+      maxWidth="sm"
+      PaperProps={{ 
+        style: { 
+          backgroundColor: theme.palette.background.paper,
+          color: theme.palette.text.primary,
+        } 
+      }}
+    >
+      <DialogContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 3 }}>
+        <Typography variant="h5" sx={{ mb: 2, fontWeight: 'bold' }}>SubtleSolve Stats</Typography>
+        
+        <Card elevation={3} sx={{ width: '100%', mb: 2, backgroundColor: theme.palette.background.default }}>
+          <CardContent sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
+            <StatItem value={played} label="Played" />
+            <StatItem value={win_percent} label="Win %" />
+            <StatItem value={currentStreak} label="Current Streak" />
+            <StatItem value={bestStreak} label="Max Streak" />
           </CardContent>
         </Card>
-        <Card sx={{ ...commonCardStyles, height: 'auto', width: '100%' }}>
-          <CardContent sx={{ height: 'auto' }}>
+        
+        <Card elevation={3} sx={{ width: '100%', height: 300, mb: 2, backgroundColor: theme.palette.background.default }}>
+          <CardContent>
             <Bar data={chartData} options={options} />
           </CardContent>
         </Card>
-        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 1, flexWrap: 'wrap' }}>
-          <Button variant="contained" onClick={() => handleShare('web')} sx={{ margin: 1, backgroundColor: 'white', color: 'black', flex: '1 1 1' }}>
-            <ShareIcon /> SHARE
+        
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
+          <Button 
+            variant="contained" 
+            onClick={() => handleShare('web')} 
+            startIcon={<ShareIcon />}
+            fullWidth={isMobile}
+          >
+            Share
           </Button>
-          <Button variant="contained" onClick={() => handleShare('twitter')} sx={{ margin: 1, backgroundColor: 'black', color: 'white', flex: '1 1 1' }}>
-            <TwitterIcon /> SHARE ON X
+          <Button 
+            variant="contained" 
+            onClick={() => handleShare('twitter')} 
+            startIcon={<TwitterIcon />}
+            fullWidth={isMobile}
+            sx={{ backgroundColor: '#1DA1F2', '&:hover': { backgroundColor: '#1a91da' } }}
+          >
+            Share on X
           </Button>
         </Box>
       </DialogContent>

@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
+import { useKeycloak } from '@react-keycloak/web';
+import { PuzzleService } from '../services/PuzzleService';
+import { Alert, CircularProgress, Container, Paper, Typography, Box } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Types from './categoryTitle';
 import AnswerField from './answerField';
 import ListDividers from './clueList';
-import Alert from '@mui/material/Alert';
-import CircularProgress from '@mui/material/CircularProgress';
-import { PuzzleService } from '../services/PuzzleService';
-import { useKeycloak } from '@react-keycloak/web';
-import StatsDialogAnswer from './StatsDialogAnswer';
 import StatsDialog from './StatsDialog';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#2196f3',
+    },
+    secondary: {
+      main: '#f50057',
+    },
+  },
+});
 
 export default function ScreenLayout() {
   const pluralize = require('pluralize');
@@ -17,15 +26,13 @@ export default function ScreenLayout() {
   const [submits, setSubmits] = useState([]);
   const [openStatsAnswer, setOpenStatsAnswer] = useState(false);
   const [statsData, setStatsData] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
-  
+
   useEffect(() => {
     const fetchDailyPuzzle = async () => {
       try {
-        
         const result = await PuzzleService.Getdailypuzzle();
-        // console.log(result);
         setData(result.data);
       } catch (err) {
         setError(err);
@@ -33,10 +40,8 @@ export default function ScreenLayout() {
         setLoading(false);
       }
     };
-
     fetchDailyPuzzle();
   }, []);
-
 
   useEffect(() => {
     if (initialized && keycloak.authenticated && data && data.dailyGameId) {
@@ -45,11 +50,8 @@ export default function ScreenLayout() {
           const response = await PuzzleService.getGameHistory(data.dailyGameId, keycloak.token);
           const guessList = response.data;
           setSubmits(guessList);
-
           if (guessList.length === 6 || guessList.includes(data.answer)) {
-            
             const statResponse = await PuzzleService.getStats(keycloak.token);
-            console.log(statResponse);
             setStatsData(statResponse.data);
             setOpenStatsAnswer(true);
           }
@@ -57,19 +59,12 @@ export default function ScreenLayout() {
           console.error('Error fetching game history:', error);
         }
       };
-
       fetchGameHistory();
     }
   }, [initialized, keycloak, data]);
 
   const onSubmit = (guessList) => {
     setSubmits(guessList);
-
-    // if (guessList.length === 6 || guessList.includes(data.answer)) {
-    //   const response = await PuzzleService.getStats(keycloak.token);
-    //   setStatsData(response.data);
-    //   setOpenStatsAnswer(true);
-    // }
   };
 
   const handleCloseStatsAnswer = () => {
@@ -78,17 +73,9 @@ export default function ScreenLayout() {
 
   if (loading) {
     return (
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-          flexDirection: 'column'
-        }}
-      >
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
         <CircularProgress />
-        <h4>Getting your puzzle for today...</h4>
+        <Typography variant="h6" sx={{ ml: 2 }}>Getting your puzzle for today...</Typography>
       </Box>
     );
   }
@@ -98,17 +85,32 @@ export default function ScreenLayout() {
   }
 
   return (
-    <div style={{ marginTop: '100px' }}>
-      <Types category={data.category} />
-      <AnswerField
-        category={pluralize.singular(data.category)}
-        answer={data.answer}
-        onSubmit={onSubmit}
-        gameID={data.dailyGameId}
-        guessList={submits}
-      />
-      <ListDividers clueList={data.clues} guessList={submits} answer={data.answer} />
-      <StatsDialog open={openStatsAnswer} handleClose={handleCloseStatsAnswer} played={statsData.played} win_percent={statsData.win_percent} currentStreak={statsData.currentStreak} bestStreak={statsData.bestStreak} scoreDistribution={statsData.scoreDistribution} />
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container maxWidth="sm">
+        <Paper elevation={3} sx={{ mt: 10, p: 3, borderRadius: 2 }}>
+          <Typography variant="h4" component="h1" gutterBottom align="center">
+            Daily Puzzle
+          </Typography>
+          <Types category={data.category} />
+          <AnswerField
+            category={pluralize.singular(data.category)}
+            answer={data.answer}
+            onSubmit={onSubmit}
+            gameID={data.dailyGameId}
+            guessList={submits}
+          />
+          <ListDividers clueList={data.clues} guessList={submits} answer={data.answer} />
+          <StatsDialog
+            open={openStatsAnswer}
+            handleClose={handleCloseStatsAnswer}
+            played={statsData.played}
+            win_percent={statsData.win_percent}
+            currentStreak={statsData.currentStreak}
+            bestStreak={statsData.bestStreak}
+            scoreDistribution={statsData.scoreDistribution}
+          />
+        </Paper>
+      </Container>
+    </ThemeProvider>
   );
 }

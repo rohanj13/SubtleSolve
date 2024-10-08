@@ -1,27 +1,35 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+import React, { useState, useEffect } from 'react';
+import { useKeycloak } from '@react-keycloak/web';
+import { PuzzleService } from '../services/PuzzleService';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Avatar,
+  Box,
+  Tooltip,
+  useTheme,
+  useMediaQuery,
+} from '@mui/material';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import InfoIcon from '@mui/icons-material/Info';
-import { useKeycloak } from '@react-keycloak/web';
-import Avatar from '@mui/material/Avatar';
 import InstructionsDialog from './InstructionDialog';
 import StatsDialog from './StatsDialog';
-import { PuzzleService } from '../services/PuzzleService';
 
 export default function ButtonAppBar() {
   const { keycloak } = useKeycloak();
-  const [openStats, setOpenStats] = React.useState(false);
-  const [name, setName] = React.useState("");
-  const [statsData, setStatsData] = React.useState({});
-  const [openInstructions, setOpenInstructions] = React.useState(false);
+  const [openStats, setOpenStats] = useState(false);
+  const [openInstructions, setOpenInstructions] = useState(false);
+  const [name, setName] = useState("");
+  const [statsData, setStatsData] = useState({});
 
-  React.useEffect(() => {
-    if (!!keycloak.authenticated && keycloak.tokenParsed) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  useEffect(() => {
+    if (keycloak.authenticated && keycloak.tokenParsed) {
       const fullname = keycloak.tokenParsed.name || "Unknown User";
       setName(fullname);
     }
@@ -41,32 +49,24 @@ export default function ButtonAppBar() {
     }
   };
 
-  const handleOpenInstructions = () => {
-    setOpenInstructions(true);
-  };
+  const handleOpenInstructions = () => setOpenInstructions(true);
+  const handleCloseInstructions = () => setOpenInstructions(false);
+  const handleCloseStats = () => setOpenStats(false);
 
-  const handleCloseInstructions = () => {
-    setOpenInstructions(false);
-  };
-
-  const handleCloseStats = () => {
-    setOpenStats(false);
-  };
-
-  function stringToColor(string) {
+  const stringToColor = (string) => {
     let hash = 0;
-    for (let i = 0; i < string.length; i += 1) {
+    for (let i = 0; i < string.length; i++) {
       hash = string.charCodeAt(i) + ((hash << 5) - hash);
     }
     let color = '#';
-    for (let i = 0; i < 3; i += 1) {
+    for (let i = 0; i < 3; i++) {
       const value = (hash >> (i * 8)) & 0xff;
       color += `00${value.toString(16)}`.slice(-2);
     }
     return color;
-  }
+  };
 
-  function stringAvatar(name) {
+  const stringAvatar = (name) => {
     const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
     return {
       sx: {
@@ -74,38 +74,56 @@ export default function ButtonAppBar() {
       },
       children: initials,
     };
-  }
+  };
 
   return (
-    <Box sx={{ flexGrow: 1, maxWidth: '100%' }}>
-      <AppBar position="static" sx={{ flexGrow: 1, backgroundColor: 'black', maxWidth: '100%' }}>
-        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div>
-            <IconButton color="inherit" aria-label="Stats" sx={{ marginLeft: -2 }} onClick={handleStatsClick}>
+    <AppBar position="static" color="primary">
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Tooltip title="Stats">
+            <IconButton color="inherit" onClick={handleStatsClick} size="large">
               <BarChartIcon />
             </IconButton>
-            <IconButton color="inherit" aria-label="How to Play" onClick={handleOpenInstructions}>
+          </Tooltip>
+          <Tooltip title="How to Play">
+            <IconButton color="inherit" onClick={handleOpenInstructions} size="large">
               <InfoIcon />
             </IconButton>
-            <InstructionsDialog open={openInstructions} handleClose={handleCloseInstructions} />
-          </div>
-          <Typography variant="h5" component="div" sx={{ display: 'flex', textAlign: 'center' }}>
-            SubtleSolve
-          </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-            {!keycloak.authenticated && (
-              <Button color="inherit" sx={{ display: 'flex', marginRight: -2 }} onClick={() => keycloak.login()}>Login</Button>
-            )}
-            {!!keycloak.authenticated && (
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Button color="inherit" sx={{ display: 'flex', marginRight: 2 }} onClick={() => keycloak.logout()}>Logout</Button>
+          </Tooltip>
+        </Box>
+
+        <Typography variant="h5" component="div" sx={{ flexGrow: 1, textAlign: 'center' }}>
+          SubtleSolve
+        </Typography>
+
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          {!keycloak.authenticated ? (
+            <Button color="inherit" onClick={() => keycloak.login()}>
+              {isMobile ? 'Log In' : 'Login'}
+            </Button>
+          ) : (
+            <>
+              <Button color="inherit" onClick={() => keycloak.logout()} sx={{ mr: 1 }}>
+                {isMobile ? 'Log Out' : 'Logout'}
+              </Button>
+              <Tooltip title={name}>
                 <Avatar {...stringAvatar(name)} />
-              </Box>
-            )}
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <StatsDialog open={openStats} handleClose={handleCloseStats} played={statsData.played} win_percent={statsData.win_percent} currentStreak={statsData.currentStreak} bestStreak={statsData.bestStreak} scoreDistribution={statsData.scoreDistribution} />
-    </Box>
+              </Tooltip>
+            </>
+          )}
+        </Box>
+      </Toolbar>
+
+      <InstructionsDialog open={openInstructions} handleClose={handleCloseInstructions} />
+      <StatsDialog 
+        open={openStats} 
+        handleClose={handleCloseStats} 
+        played={statsData.played}
+        win_percent={statsData.win_percent}
+        currentStreak={statsData.currentStreak}
+        bestStreak={statsData.bestStreak}
+        scoreDistribution={statsData.scoreDistribution}
+      />
+    </AppBar>
   );
 }
