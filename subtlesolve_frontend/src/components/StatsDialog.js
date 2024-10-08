@@ -21,8 +21,11 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,
 export default function StatsDialog({ open, handleClose, played, win_percent, currentStreak, bestStreak, scoreDistribution }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const scores = Object.values(scoreDistribution);
+  const scores = [];
+  for (var key in scoreDistribution) {
+    scores.push(scoreDistribution[key]);
+  }
+  // const scores = Object.values(scoreDistribution);
 
   const chartData = {
     labels: ['0', '1', '2', '3', '4', '5'],

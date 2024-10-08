@@ -14,16 +14,17 @@ services:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
     depends_on:
+      - certbot
       - subtlesolve-fe
       - subtlesolve-be
-    certbot:
-      image: certbot/certbot
-      container_name: certbot
-      volumes:
-        - web-root:/usr/share/nginx/html
-        - certbot-etc:/etc/letsencrypt
-        - certbot-var:/var/lib/letsencrypt
-      command: certonly --webroot --webroot-path=/usr/share/nginx/html  --email subtlesolve@gmail.com --agree-tos --no-eff-email -d subtlesolve.org  -d www.subtlesolve.org -d auth.subtlesolve.org
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - web-root:/usr/share/nginx/html
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+    command: certonly --webroot --webroot-path=/usr/share/nginx/html  --email subtlesolve@gmail.com --agree-tos --no-eff-email -d subtlesolve.org  -d www.subtlesolve.org -d auth.subtlesolve.org
   subtlesolve-fe:
     image: rohanj13/subtlesolverepo:react-app-${TAG}
     build: ./subtlesolve_frontend
