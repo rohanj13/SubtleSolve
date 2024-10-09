@@ -25,7 +25,6 @@ export default function StatsDialog({ open, handleClose, played, win_percent, cu
   for (var key in scoreDistribution) {
     scores.push(scoreDistribution[key]);
   }
-  // const scores = Object.values(scoreDistribution);
 
   const chartData = {
     labels: ['0', '1', '2', '3', '4', '5'],

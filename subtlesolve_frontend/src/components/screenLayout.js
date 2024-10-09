@@ -8,13 +8,29 @@ import AnswerField from './answerField';
 import ListDividers from './clueList';
 import StatsDialog from './StatsDialog';
 
-const theme = createTheme({
+const darkTheme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
-      main: '#2196f3',
+      main: '#bb86fc',
     },
-    secondary: {
-      main: '#f50057',
+    background: {
+      default: '#121212',
+      paper: '#1e1e1e',
+    },
+    text: {
+      primary: '#ffffff',
+      secondary: '#b0b0b0',
+    },
+  },
+  typography: {
+    fontFamily: 'Roboto, sans-serif',
+    h6: {
+      fontWeight: 500,
+      fontSize: '1.25rem',
+    },
+    body2: {
+      color: '#b0b0b0',
     },
   },
 });
@@ -73,9 +89,9 @@ export default function ScreenLayout() {
 
   if (loading) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <CircularProgress />
-        <Typography variant="h6" sx={{ ml: 2 }}>Getting your puzzle for today...</Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#121212' }}>
+        <CircularProgress color="primary" />
+        <Typography variant="h6" sx={{ ml: 2, color: '#ffffff' }}>Getting your puzzle for today...</Typography>
       </Box>
     );
   }
@@ -85,12 +101,9 @@ export default function ScreenLayout() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={darkTheme}>
       <Container maxWidth="sm">
-        <Paper elevation={3} sx={{ mt: 10, p: 3, borderRadius: 2 }}>
-          <Typography variant="h4" component="h1" gutterBottom align="center">
-            Daily Puzzle
-          </Typography>
+        <Paper elevation={3} sx={{ mt: 10, p: 3, borderRadius: 2, backgroundColor: '#1e1e1e', color: '#ffffff' }}>
           <Types category={data.category} />
           <AnswerField
             category={pluralize.singular(data.category)}
