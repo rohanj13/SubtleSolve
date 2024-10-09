@@ -14,7 +14,7 @@ services:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
     depends_on:
-      - certbot
+      # - certbot
       - subtlesolve-fe
       - subtlesolve-be
   # certbot:

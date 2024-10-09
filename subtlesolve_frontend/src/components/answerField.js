@@ -106,7 +106,7 @@ export default function AnswerField({ category, answer, onSubmit, gameID, guessL
           </Box>
         </Grid>
         <Grid item xs={12} sm={8} md={6}>
-          <Box component="form" onKeyPress={handleKeyPress} sx={{ display: 'flex', alignItems: 'flex-end' }}>
+          <Box component="form" onKeyPress={handleKeyPress} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <TextField
               fullWidth
               disabled={hasExhaustedGuesses || hasGuessedCorrectly}
@@ -114,7 +114,7 @@ export default function AnswerField({ category, answer, onSubmit, gameID, guessL
               variant="outlined"
               value={guess}
               onChange={(e) => setGuess(e.target.value)}
-              sx={{ mr: 1 }}
+              sx={{ mb: 1 }} // Add margin-bottom for spacing
             />
             <Button
               onClick={handleSubmit}

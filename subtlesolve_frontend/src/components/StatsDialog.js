@@ -102,13 +102,14 @@ export default function StatsDialog({ open, handleClose, played, win_percent, cu
         <Typography variant="h5" sx={{ mb: 2, fontWeight: 'bold' }}>SubtleSolve Stats</Typography>
         
         <Card elevation={3} sx={{ width: '100%', mb: 2, backgroundColor: theme.palette.background.default }}>
-          <CardContent sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
-            <StatItem value={played} label="Played" />
-            <StatItem value={win_percent} label="Win %" />
-            <StatItem value={currentStreak} label="Current Streak" />
-            <StatItem value={bestStreak} label="Max Streak" />
+          <CardContent sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'nowrap', overflow: 'auto', padding: 1 }}>
+            <StatItem value={played} label="Played" sx={{ flexShrink: 1, minWidth: 'auto', padding: 1 }} />
+            <StatItem value={win_percent} label="Win %" sx={{ flexShrink: 1, minWidth: 'auto', padding: 1 }} />
+            <StatItem value={currentStreak} label="Current Streak" sx={{ flexShrink: 1, minWidth: 'auto', padding: 1 }} />
+            <StatItem value={bestStreak} label="Max Streak" sx={{ flexShrink: 1, minWidth: 'auto', padding: 1 }} />
           </CardContent>
         </Card>
+
         
         <Card elevation={3} sx={{ width: '100%', height: 300, mb: 2, backgroundColor: theme.palette.background.default }}>
           <CardContent>
