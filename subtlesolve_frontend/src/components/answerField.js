@@ -106,7 +106,11 @@ export default function AnswerField({ category, answer, onSubmit, gameID, guessL
           </Box>
         </Grid>
         <Grid item xs={12} sm={8} md={6}>
-          <Box component="form" onKeyPress={handleKeyPress} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <Box 
+            component="form" 
+            onKeyPress={handleKeyPress} 
+            sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} // Change to 'center'
+          >
             <TextField
               fullWidth
               disabled={hasExhaustedGuesses || hasGuessedCorrectly}
@@ -121,6 +125,7 @@ export default function AnswerField({ category, answer, onSubmit, gameID, guessL
               variant="contained"
               color="primary"
               disabled={hasExhaustedGuesses || hasGuessedCorrectly}
+              sx={{ width: '100%' }} // Optional: to make the button full width
             >
               Submit
             </Button>
