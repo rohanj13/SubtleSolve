@@ -46,7 +46,7 @@ public class DailyGame {
 
     private String questionId;
     // @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    // @Indexed(unique = true)
+    @Indexed(unique = true)
     private String date;
     private Float avgScore;
 }
