@@ -29,9 +29,9 @@ jobs:
         env:
           TAG: ${{ github.sha }}
         run: |
-          docker build -t rohanj13/subtlesolverepo:spring-boot-app-${TAG} -f ./backend/Dockerfile ./backend
+          # docker build -t rohanj13/subtlesolverepo:spring-boot-app-${TAG} -f ./backend/Dockerfile ./backend
           docker build -t rohanj13/subtlesolverepo:react-app-${TAG} -f ./subtlesolve_frontend/Dockerfile ./subtlesolve_frontend
-          docker push rohanj13/subtlesolverepo:spring-boot-app-${TAG}
+          # docker push rohanj13/subtlesolverepo:spring-boot-app-${TAG}
           docker push rohanj13/subtlesolverepo:react-app-${TAG}
 
   deploy:
