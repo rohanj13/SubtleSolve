@@ -1,6 +1,7 @@
 package com.SubtleSolve.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 // import org.springframework.format.annotation.DateTimeFormat;
 
@@ -45,6 +46,7 @@ public class DailyGame {
 
     private String questionId;
     // @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Indexed(unique = true)
     private String date;
     private Float avgScore;
 }

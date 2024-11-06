@@ -8,6 +8,7 @@ import com.SubtleSolve.model.DailyGame;
 import com.SubtleSolve.model.Question;
 import com.SubtleSolve.repository.GameRepo;
 import com.SubtleSolve.repository.QuestionRepo;
+import com.mongodb.DuplicateKeyException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -48,21 +49,23 @@ public class PuzzleServiceImpl implements PuzzleService {
 
     @Override
     public String getDailyGame(String today) {
-        // run create daily game for testing everytime this is called, then call this in
-        // the controller to get the document and question id
         DailyGame dailygame;
         Optional<DailyGame> optionalDailygame = gameRepo.findByDate(today);
-        // LocalDate ld = LocalDate.now(ZoneId.of("Australia/Sydney"));
-        // System.out.println(ld);
-        // System.out.println(optionalDailygame.get().getDate());
-        // System.out.println((dailygame.getDate().plusHours(11).toLocalDate()));
-        if (!optionalDailygame.isPresent()) {
-            dailygame = createDailyGame(today);
 
+        if (!optionalDailygame.isPresent()) {
+            try {
+                // Attempt to create the daily game
+                dailygame = createDailyGame(today);
+            } catch (DuplicateKeyException e) {
+                // If a duplicate key exception occurs, fetch the existing puzzle
+                dailygame = gameRepo.findByDate(today)
+                        .orElseThrow(() -> new RuntimeException("Puzzle not found after duplicate error"));
+            }
         } else {
             dailygame = optionalDailygame.get();
         }
 
+        // Retrieve the question and build the response
         Optional<Question> gameQuestion = questionRepo.findById(dailygame.getQuestionId());
         JSONObject jsonResponse = new JSONObject();
         if (gameQuestion.isPresent()) {
@@ -73,7 +76,6 @@ public class PuzzleServiceImpl implements PuzzleService {
         }
 
         return jsonResponse.toString();
-
     }
 
 }
