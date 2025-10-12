@@ -46,8 +46,4 @@ jobs:
             --region ${{ secrets.REGION }} \
             --allow-unauthenticated \
             --memory 512Mi \
-            --set-env-vars MONGO_URI=${{ secrets.MONGO_URI }},\
-AUTH0_ISSUER_URI=${{ secrets.AUTH0_ISSUER_URI }},\
-AUTH0_JWKS_URI=${{ secrets.AUTH0_JWKS_URI }},\
-UNSECURE_PATHS=${{ secrets.UNSECURE_PATHS }},\
-JWT_PRINCIPAL_ATTR=${{ secrets.JWT_PRINCIPAL_ATTR }}
+            --set-env-vars MONGO_URI=${{ secrets.MONGO_URI }},AUTH0_ISSUER_URI=${{ secrets.AUTH0_ISSUER_URI }},AUTH0_JWKS_URI=${{ secrets.AUTH0_JWKS_URI }},UNSECURE_PATHS=${{ secrets.UNSECURE_PATHS }},JWT_PRINCIPAL_ATTR=${{ secrets.JWT_PRINCIPAL_ATTR }}
