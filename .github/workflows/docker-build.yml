@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v3
 
       - name: Set up JDK 17
@@ -30,10 +30,9 @@ jobs:
           install_components: 'gcloud-artifact-registry-docker'
 
       - name: Configure Docker for Artifact Registry
-        run: |
-          gcloud auth configure-docker ${REGION}-docker.pkg.dev
+        run: gcloud auth configure-docker ${REGION}-docker.pkg.dev
 
-      - name: Build Spring Boot Docker image
+      - name: Build Spring Boot Container Image
         run: |
           ./gradlew bootBuildImage \
             --imageName=${{ secrets.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.REPO_NAME }}/subtlesolve-backend:latest \
@@ -47,4 +46,8 @@ jobs:
             --region ${{ secrets.REGION }} \
             --allow-unauthenticated \
             --memory 512Mi \
-            --set-env-vars MONGO_URI=${{ secrets.MONGO_URI }},AUTH0_CLIENT_ID=${{ secrets.AUTH0_CLIENT_ID }},AUTH0_DOMAIN=${{ secrets.AUTH0_DOMAIN }}
+            --set-env-vars MONGO_URI=${{ secrets.MONGO_URI }},\
+AUTH0_ISSUER_URI=${{ secrets.AUTH0_ISSUER_URI }},\
+AUTH0_JWKS_URI=${{ secrets.AUTH0_JWKS_URI }},\
+UNSECURE_PATHS=${{ secrets.UNSECURE_PATHS }},\
+JWT_PRINCIPAL_ATTR=${{ secrets.JWT_PRINCIPAL_ATTR }}
