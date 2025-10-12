@@ -30,15 +30,18 @@ public class PuzzleServiceImpl implements PuzzleService {
         DailyGame dg = new DailyGame();
         boolean gotQuestion = false;
         Question question = null;
+        System.out.println("about to get question");
         while (!gotQuestion) {
-            question = questionRepo.random().getMappedResults().stream().findFirst().orElse(null);
 
+            question = questionRepo.random().getMappedResults().stream().findFirst().orElse(null);
+            // System.out.println("found a question");
             if (!question.getPlayed()) {
                 dg.setQuestion(question.getQuestionId());
                 gotQuestion = true;
             }
-        }
 
+        }
+        System.out.println(question);
         // System.out.println(now);
         dg.setDate(today);
         gameRepo.save(dg);
@@ -51,17 +54,20 @@ public class PuzzleServiceImpl implements PuzzleService {
     public String getDailyGame(String today) {
         DailyGame dailygame;
         Optional<DailyGame> optionalDailygame = gameRepo.findByDate(today);
-
+        System.out.println("in getDailyGame service");
         if (!optionalDailygame.isPresent()) {
             try {
                 // Attempt to create the daily game
+                System.out.println("creating new daily game");
                 dailygame = createDailyGame(today);
             } catch (DuplicateKeyException e) {
                 // If a duplicate key exception occurs, fetch the existing puzzle
+                System.out.println("duplicate key exception");
                 dailygame = gameRepo.findByDate(today)
                         .orElseThrow(() -> new RuntimeException("Puzzle not found after duplicate error"));
             }
         } else {
+            System.out.println("getting existing game");
             dailygame = optionalDailygame.get();
         }
 
