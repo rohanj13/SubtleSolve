@@ -35,7 +35,6 @@ dependencies {
 
 
 bootBuildImage {
-    imageName = "australia-southeast1-docker.pkg.dev/${project.findProperty("gcpProject")}/${project.findProperty("artifactRepo")}/subtlesolve-backend:latest"
     builder = "paketobuildpacks/builder:tiny"  // small, fast images
     environment = [
         "BP_JVM_VERSION": "17",
