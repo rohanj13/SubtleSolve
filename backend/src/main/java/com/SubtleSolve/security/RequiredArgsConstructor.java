@@ -1,5 +1,5 @@
-package com.SubtleSolve.security;
+// package com.SubtleSolve.security;
 
-public @interface RequiredArgsConstructor {
+// public @interface RequiredArgsConstructor {
 
-}
+// }

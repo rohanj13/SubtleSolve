@@ -1,0 +1,582 @@
+[
+    {
+        "category": "Books",
+        "answer": "1984",
+        "played": "False",
+        "clues": ["This book is a dystopian novel.", "It was written by George Orwell.", "It was published in 1949.", "It features a totalitarian regime.", "The protagonist is Winston Smith."]
+    },
+    {
+        "category": "Books",
+        "answer": "To Kill a Mockingbird",
+        "played": "False",
+        "clues": ["This book is a novel about racial injustice.", "It was written by Harper Lee.", "It was published in 1960.", "It is set in the American South during the 1930s.", "The protagonist is Scout Finch."]
+    },
+    {
+        "category": "Books",
+        "answer": "Moby-Dick",
+        "played": "False",
+        "clues": ["This book is a novel about a whaling voyage.", "It was written by Herman Melville.", "It was published in 1851.", "It features the obsessive Captain Ahab.", "The titular whale is named Moby Dick."]
+    },
+    {
+        "category": "Books",
+        "answer": "Pride and Prejudice",
+        "played": "False",
+        "clues": ["This book is a romantic novel.", "It was written by Jane Austen.", "It was published in 1813.", "It explores themes of love and social standing.", "The protagonist is Elizabeth Bennet."]
+    },
+    {
+        "category": "Books",
+        "answer": "The Great Gatsby",
+        "played": "False",
+        "clues": ["This book is a novel about the American Dream.", "It was written by F. Scott Fitzgerald.", "It was published in 1925.", "It is set in the 1920s.", "The protagonist is Jay Gatsby."]
+    },
+    {
+        "category": "Books",
+        "answer": "War and Peace",
+        "played": "False",
+        "clues": ["This book is a historical novel.", "It was written by Leo Tolstoy.", "It was published in 1869.", "It is set during the Napoleonic Wars.", "It features the Rostov and Bolkonsky families."]
+    },
+    {
+        "category": "Books",
+        "answer": "The Catcher in the Rye",
+        "played": "False",
+        "clues": ["This book is a novel about teenage alienation.", "It was written by J.D. Salinger.", "It was published in 1951.", "The protagonist is Holden Caulfield.", "It is set in New York City."]
+    },
+    {
+        "category": "Books",
+        "answer": "The Hobbit",
+        "played": "False",
+        "clues": ["This book is a fantasy novel.", "It was written by J.R.R. Tolkien.", "It was published in 1937.", "It is a prelude to 'The Lord of the Rings'.", "The protagonist is Bilbo Baggins."]
+    },
+    {
+        "category": "Books",
+        "answer": "Crime and Punishment",
+        "played": "False",
+        "clues": ["This book is a psychological novel.", "It was written by Fyodor Dostoevsky.", "It was published in 1866.", "It explores themes of guilt and redemption.", "The protagonist is Raskolnikov."]
+    },
+    {
+        "category": "Books",
+        "answer": "Jane Eyre",
+        "played": "False",
+        "clues": ["This book is a novel about an orphaned girl.", "It was written by Charlotte Brontë.", "It was published in 1847.", "It explores themes of love and independence.", "The protagonist is Jane Eyre."]
+    },
+    {
+        "category": "Songs",
+        "answer": "Bohemian Rhapsody",
+        "played": "False",
+        "clues": ["This song is a rock ballad.", "It was released in 1975.", "It is known for its operatic section.", "It was performed by Queen.", "It was written by Freddie Mercury."]
+    },
+    {
+        "category": "Songs",
+        "answer": "Imagine",
+        "played": "False",
+        "clues": ["This song is a soft rock ballad.", "It was released in 1971.", "It is known for its message of peace.", "It was performed by John Lennon.", "It starts with the lyrics 'Imagine there's no heaven.'"]
+    },
+    {
+        "category": "Songs",
+        "answer": "Thriller",
+        "played": "False",
+        "clues": ["This song is a pop and funk track.", "It was released in 1982.", "It is known for its iconic music video featuring zombies.", "It was performed by Michael Jackson.", "It was the title track of the best-selling album of all time."]
+    },
+    {
+        "category": "Songs",
+        "answer": "Hotel California",
+        "played": "False",
+        "clues": ["This song is a rock track.", "It was released in 1976.", "It is known for its lengthy guitar solo.", "It was performed by Eagles.", "It starts with the lyrics 'On a dark desert highway.'"]
+    },
+    {
+        "category": "Songs",
+        "answer": "Hey Jude",
+        "played": "False",
+        "clues": ["This song is a rock ballad.", "It was released in 1968.", "It was performed by The Beatles.", "It was written by Paul McCartney.", "It features a long, repeated refrain of 'na-na-na-na'."]
+    },
+    {
+        "category": "Songs",
+        "answer": "Like a Rolling Stone",
+        "played": "False",
+        "clues": ["This song is a rock track.", "It was released in 1965.", "It was performed by Bob Dylan.", "It is known for its cutting lyrics.", "It begins with 'Once upon a time, you dressed so fine.'"]
+    },
+    {
+        "category": "Songs",
+        "answer": "Smells Like Teen Spirit",
+        "played": "False",
+        "clues": ["This song is a grunge track.", "It was released in 1991.", "It was performed by Nirvana.", "It was written by Kurt Cobain.", "It features the lyrics 'Here we are now, entertain us.'"]
+    },
+    {
+        "category": "Songs",
+        "answer": "I Will Always Love You",
+        "played": "False",
+        "clues": ["This song is a pop ballad.", "It was released in 1992.", "It was performed by Whitney Houston.", "It was originally written and performed by Dolly Parton.", "It features in the movie 'The Bodyguard'."]
+    },
+    {
+        "category": "Songs",
+        "answer": "Stairway to Heaven",
+        "played": "False",
+        "clues": ["This song is a rock track.", "It was released in 1971.", "It was performed by Led Zeppelin.", "It features a gradual buildup from acoustic to electric.", "It starts with 'There's a lady who's sure all that glitters is gold.'"]
+    },
+    {
+        "category": "Songs",
+        "answer": "Sweet Child O' Mine",
+        "played": "False",
+        "clues": ["This song is a rock track.", "It was released in 1987.", "It was performed by Guns N' Roses.", "It features a famous guitar riff by Slash.", "It starts with 'She's got a smile that it seems to me.'"]
+    },
+    {
+        "category": "Animals",
+        "answer": "Elephant",
+        "played": "False",
+        "clues": ["This animal is the largest land mammal.", "It has a long trunk and tusks.", "It is known for its intelligence and memory.", "It is found in Africa and Asia.", "It is known for its large ears and thick skin."]
+    },
+    {
+        "category": "Animals",
+        "answer": "Blue Whale",
+        "played": "False",
+        "clues": ["This animal is the largest animal ever known to have lived.", "It is a marine mammal.", "It feeds primarily on krill.", "It is known for its blue-gray color.", "It is found in oceans around the world."]
+    },
+    {
+        "category": "Animals",
+        "answer": "Bald Eagle",
+        "played": "False",
+        "clues": ["This animal is a bird of prey.", "It is the national bird of the United States.", "It is known for its white head and tail.", "It is a symbol of freedom and strength.", "It is found in North America."]
+    },
+    {
+        "category": "Animals",
+        "answer": "Kangaroo",
+        "played": "False",
+        "clues": ["This animal is a marsupial.", "It is known for its powerful hind legs and jumping ability.", "It has a pouch for carrying its young.", "It is native to Australia.", "It is often associated with the Australian outback."]
+    },
+    {
+        "category": "Animals",
+        "answer": "Penguin",
+        "played": "False",
+        "clues": ["This animal is a flightless bird.", "It is known for its black and white plumage.", "It is adapted to life in the water.", "It is found primarily in the Southern Hemisphere.", "It is often associated with Antarctica."]
+    },
+    {
+        "category": "Animals",
+        "answer": "Giraffe",
+        "played": "False",
+        "clues": ["This animal is the tallest land animal.", "It has a long neck and legs.", "It is known for its spotted coat.", "It is found in Africa.", "It primarily feeds on leaves from tall trees."]
+    },
+    {
+        "category": "Animals",
+        "answer": "Polar Bear",
+        "played": "False",
+        "clues": ["This animal is a large carnivorous mammal.", "It is adapted to cold climates.", "It has white fur for camouflage in snow.", "It is found in the Arctic region.", "It primarily hunts seals."]
+    },
+    {
+        "category": "Animals",
+        "answer": "Cheetah",
+        "played": "False",
+        "clues": ["This animal is the fastest land animal.", "It is known for its speed and agility.", "It has a slender body and long legs.", "It is found in Africa.", "It is known for its distinctive spotted coat."]
+    },
+    {
+        "category": "Animals",
+        "answer": "Gorilla",
+        "played": "False",
+        "clues": ["This animal is a large primate.", "It is known for its strength and social structure.", "It is found in the forests of central Africa.", "It is closely related to humans.", "It is known for its intelligence and use of tools."]
+    },
+    {
+        "category": "Animals",
+        "answer": "Dolphin",
+        "played": "False",
+        "clues": ["This animal is a marine mammal.", "It is known for its intelligence and playful behavior.", "It is found in oceans and seas worldwide.", "It is known for its streamlined body and dorsal fin.", "It communicates using clicks and whistles."]
+    },
+    {
+        "category": "Words",
+        "answer": "Euphoria",
+        "played": "False",
+        "clues": ["This word describes a feeling of intense happiness.", "It is often associated with a sense of well-being.", "It can be a result of success or achievement.", "It is derived from Greek.", "It is often used in psychology and medicine."]
+    },
+    {
+        "category": "Words",
+        "answer": "Epiphany",
+        "played": "False",
+        "clues": ["This word describes a sudden realization or insight.", "It is often associated with a moment of clarity.", "It is derived from Greek.", "It is often used in literature and religion.", "It can lead to a new understanding or perspective."]
+    },
+    {
+        "category": "Words",
+        "answer": "Serendipity",
+        "played": "False",
+        "clues": ["This word describes the occurrence of events by chance in a happy or beneficial way.", "It is often associated with good luck.", "It was coined by Horace Walpole.", "It is derived from a Persian fairy tale.", "It is often used to describe unexpected discoveries."]
+    },
+    {
+        "category": "Words",
+        "answer": "Nostalgia",
+        "played": "False",
+        "clues": ["This word describes a longing for the past.", "It is often associated with fond memories.", "It can be triggered by a familiar smell, sound, or place.", "It is derived from Greek.", "It is often used in psychology and literature."]
+    },
+    {
+        "category": "Words",
+        "answer": "Ubiquitous",
+        "played": "False",
+        "clues": ["This word describes something that is present everywhere.", "It is often associated with omnipresence.", "It is derived from Latin.", "It is often used in technology and business.", "It can describe trends, technology, or phenomena."]
+    },
+    {
+        "category": "Words",
+        "answer": "Melancholy",
+        "played": "False",
+        "clues": ["This word describes a feeling of deep sadness.", "It is often associated with pensive reflection.", "It is derived from Greek.", "It is often used in literature and art.", "It can describe a mood, atmosphere, or expression."]
+    },
+    {
+        "category": "Words",
+        "answer": "Quintessential",
+        "played": "False",
+        "clues": ["This word describes the most perfect or typical example of something.", "It is often associated with purity or perfection.", "It is derived from Latin.", "It is often used in descriptions and comparisons.", "It can describe an ideal instance or embodiment."]
+    },
+    {
+        "category": "Words",
+        "answer": "Ineffable",
+        "played": "False",
+        "clues": ["This word describes something too great to be expressed in words.", "It is often associated with profound experiences.", "It is derived from Latin.", "It is often used in literature and spirituality.", "It can describe beauty, joy, or divine experiences."]
+    },
+    {
+        "category": "Words",
+        "answer": "Surreptitious",
+        "played": "False",
+        "clues": ["This word describes something kept secret because it would not be approved of.", "It is often associated with stealth or secrecy.", "It is derived from Latin.", "It is often used in descriptions of actions and behaviors.", "It can describe a glance, action, or meeting."]
+    },
+    {
+        "category": "Words",
+        "answer": "Luminous",
+        "played": "False",
+        "clues": ["This word describes something that is full of or shedding light.", "It is often associated with brightness or radiance.", "It is derived from Latin.", "It is often used in descriptions of physical and metaphorical light.", "It can describe objects, appearances, or qualities."]
+    },
+    {
+        "category": "Elements",
+        "answer": "Hydrogen",
+        "played": "False",
+        "clues": ["This element is the lightest and most abundant in the universe.", "It has the atomic number 1.", "It is used in the production of ammonia.", "It is highly flammable.", "It is found in water."]
+    },
+    {
+        "category": "Elements",
+        "answer": "Oxygen",
+        "played": "False",
+        "clues": ["This element is essential for respiration.", "It has the atomic number 8.", "It makes up about 21% of Earth's atmosphere.", "It is the most abundant element in the Earth's crust.", "It is necessary for combustion."]
+    },
+    {
+        "category": "Elements",
+        "answer": "Gold",
+        "played": "False",
+        "clues": ["This element is a precious metal.", "It has the atomic number 79.", "It is used in jewelry and electronics.", "It is known for its yellow color and luster.", "It is highly malleable and ductile."]
+    },
+    {
+        "category": "Elements",
+        "answer": "Carbon",
+        "played": "False",
+        "clues": ["This element is the basis for organic life.", "It has the atomic number 6.", "It is found in all known life forms.", "It can form diamonds and graphite.", "It is known for its ability to form diverse compounds."]
+    },
+    {
+        "category": "Elements",
+        "answer": "Iron",
+        "played": "False",
+        "clues": ["This element is a metal used in construction and manufacturing.", "It has the atomic number 26.", "It is the main component of steel.", "It is known for its magnetic properties.", "It is found in the Earth's core."]
+    },
+    {
+        "category": "Elements",
+        "answer": "Helium",
+        "played": "False",
+        "clues": ["This element is a noble gas.", "It has the atomic number 2.", "It is used in balloons and airships.", "It is the second most abundant element in the universe.", "It is known for its low density and non-reactivity."]
+    },
+    {
+        "category": "Elements",
+        "answer": "Silver",
+        "played": "False",
+        "clues": ["This element is a precious metal.", "It has the atomic number 47.", "It is used in jewelry and photography.", "It is known for its high thermal and electrical conductivity.", "It has a shiny white luster."]
+    },
+    {
+        "category": "Elements",
+        "answer": "Uranium",
+        "played": "False",
+        "clues": ["This element is used as fuel in nuclear reactors.", "It has the atomic number 92.", "It is known for its radioactivity.", "It is used in the production of nuclear weapons.", "It is found in small amounts in most rocks."]
+    },
+    {
+        "category": "Elements",
+        "answer": "Calcium",
+        "played": "False",
+        "clues": ["This element is essential for bones and teeth.", "It has the atomic number 20.", "It is found in milk and dairy products.", "It is used in the production of cement and lime.", "It is the fifth most abundant element in the Earth's crust."]
+    },
+    {
+        "category": "Elements",
+        "answer": "Mercury",
+        "played": "False",
+        "clues": ["This element is a liquid at room temperature.", "It has the atomic number 80.", "It is used in thermometers and barometers.", "It is known for its toxicity.", "It is also called quicksilver."]
+    },
+    {
+        "category": "World Heritage Sites",
+        "answer": "Machu Picchu",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This site is located in South America.", "It is an ancient Incan city.", "It was rediscovered in 1911 by Hiram Bingham.", "It is situated on a mountain ridge.", "It is a famous landmark in Peru."]
+    },
+    {
+        "category": "World Heritage Sites",
+        "answer": "Great Wall of China",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This structure is located in Asia.", "It was built to protect against invasions.", "It is over 13,000 miles long.", "It was built by various Chinese dynasties.", "It is one of the most famous landmarks in China."]
+    },
+    {
+        "category": "World Heritage Sites",
+        "answer": "Taj Mahal",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This site is located in Asia.", "It is a mausoleum built by a Mughal emperor.", "It is made of white marble.", "It was completed in 1653.", "It is a famous landmark in India."]
+    },
+    {
+        "category": "World Heritage Sites",
+        "answer": "Pyramids of Giza",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This site is located in Africa.", "It is a complex of ancient monuments.", "It includes the Great Sphinx.", "They were built as tombs for pharaohs.", "It is one of the most famous landmarks in Egypt."]
+    },
+    {
+        "category": "World Heritage Sites",
+        "answer": "Stonehenge",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This site is located in Europe.", "It is a prehistoric monument.", "It consists of a ring of standing stones.", "It is believed to have been built around 3000 BC.", "It is a famous landmark in the United Kingdom."]
+    },
+    {
+        "category": "World Heritage Sites",
+        "answer": "Colosseum",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This site is located in Europe.", "It is an ancient amphitheater.", "It was used for gladiatorial contests.", "It was built during the Roman Empire.", "It is a famous landmark in Italy."]
+    },
+    {
+        "category": "World Heritage Sites",
+        "answer": "Angkor Wat",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This site is located in Asia.", "It is a temple complex.", "It was originally built as a Hindu temple.", "It is the largest religious monument in the world.", "It is a famous landmark in Cambodia."]
+    },
+    {
+        "category": "World Heritage Sites",
+        "answer": "Petra",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This site is located in the Middle East.", "It is an archaeological city.", "It is famous for its rock-cut architecture.", "It was the capital of the Nabataean Kingdom.", "It is a famous landmark in Jordan."]
+    },
+    {
+        "category": "World Heritage Sites",
+        "answer": "Acropolis of Athens",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This site is located in Europe.", "It is an ancient citadel.", "It includes the Parthenon.", "It was built during the 5th century BC.", "It is a famous landmark in Greece."]
+    },
+    {
+        "category": "World Heritage Sites",
+        "answer": "Statue of Liberty",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This site is located in North America.", "It was a gift from France.", "It symbolizes freedom and democracy.", "It was dedicated in 1886.", "It is a famous landmark in the United States."]
+    },
+    {
+        "category": "Scientists",
+        "answer": "Albert Einstein",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This scientist developed the theory of relativity.", "He won the Nobel Prize in Physics in 1921.", "He was known for his equation E=mc^2.", "He was born in Germany.", "He is famous for his work in theoretical physics."]
+    },
+    {
+        "category": "Scientists",
+        "answer": "Isaac Newton",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This scientist formulated the laws of motion and gravity.", "He wrote 'Principia Mathematica'.", "He was an English mathematician and physicist.", "He made significant contributions to optics.", "He is famous for the apple falling from a tree anecdote."]
+    },
+    {
+        "category": "Scientists",
+        "answer": "Marie Curie",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This scientist conducted pioneering research on radioactivity.", "She was the first woman to win a Nobel Prize.", "She won Nobel Prizes in both Physics and Chemistry.", "She discovered the elements polonium and radium.", "She was born in Poland and worked in France."]
+    },
+    {
+        "category": "Scientists",
+        "answer": "Charles Darwin",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This scientist proposed the theory of evolution by natural selection.", "He wrote 'On the Origin of Species'.", "He was a British naturalist.", "His work was based on observations made during the voyage of the HMS Beagle.", "He is known for his studies of finches in the Galapagos Islands."]
+    },
+    {
+        "category": "Scientists",
+        "answer": "Nikola Tesla",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This scientist made significant contributions to the development of AC electricity.", "He was born in what is now Croatia.", "He worked with Thomas Edison early in his career.", "He invented the Tesla coil.", "He is known for his work in electrical engineering and electromagnetism."]
+    },
+    {
+        "category": "Scientists",
+        "answer": "Galileo Galilei",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This scientist is known as the 'father of modern observational astronomy'.", "He improved the telescope and made significant astronomical discoveries.", "He supported the heliocentric model of the solar system.", "He was an Italian mathematician, physicist, and astronomer.", "He discovered the four largest moons of Jupiter."]
+    },
+    {
+        "category": "Scientists",
+        "answer": "Louis Pasteur",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This scientist is known for his discoveries in the principles of vaccination and microbial fermentation.", "He developed the process of pasteurization.", "He created the first vaccines for rabies and anthrax.", "He was a French biologist, microbiologist, and chemist.", "He is known for his work on the germ theory of disease."]
+    },
+    {
+        "category": "Scientists",
+        "answer": "Stephen Hawking",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This scientist made significant contributions to cosmology and black hole theory.", "He wrote 'A Brief History of Time'.", "He had ALS, which left him almost completely paralyzed.", "He held the position of Lucasian Professor of Mathematics at Cambridge.", "He is known for his work on black holes and the theory of everything."]
+    },
+    {
+        "category": "Scientists",
+        "answer": "Thomas Edison",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This scientist held over 1,000 patents.", "He invented the phonograph and the motion picture camera.", "He developed a practical electric light bulb.", "He founded General Electric.", "He is known as one of America's greatest inventors."]
+    },
+    {
+        "category": "Scientists",
+        "answer": "Rosalind Franklin",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This scientist made critical contributions to the understanding of DNA.", "Her work included X-ray diffraction images of DNA.", "She worked with Maurice Wilkins.", "She was a British biophysicist and chemist.", "Her photo 51 was crucial in discovering the double helix structure of DNA."]
+    },
+    {
+        "category": "World Leaders",
+        "answer": "Nelson Mandela",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This leader spent 27 years in prison.", "He won the Nobel Peace Prize in 1993.", "He was the first black president of his country.", "He was a key figure in the anti-apartheid movement.", "He led South Africa from 1994 to 1999."]
+    },
+    {
+        "category": "World Leaders",
+        "answer": "Winston Churchill",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This leader served as Prime Minister during World War II.", "He was known for his oratory skills.", "He wrote 'The Second World War' series.", "He won the Nobel Prize in Literature in 1953.", "He was the Prime Minister of the United Kingdom."]
+    },
+    {
+        "category": "World Leaders",
+        "answer": "Mahatma Gandhi",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This leader was a proponent of non-violent resistance.", "He led the Salt March in 1930.", "He played a crucial role in India's independence movement.", "He was assassinated in 1948.", "He is known as the 'Father of the Nation' in India."]
+    },
+    {
+        "category": "World Leaders",
+        "answer": "Franklin D. Roosevelt",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This leader served four terms as President.", "He implemented the New Deal.", "He led his country through the Great Depression and World War II.", "He was paralyzed from the waist down due to polio.", "He was the President of the United States."]
+    },
+    {
+        "category": "World Leaders",
+        "answer": "Margaret Thatcher",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This leader was known as the 'Iron Lady'.", "She implemented policies known as Thatcherism.", "She was the first woman to hold her office.", "She served as Prime Minister from 1979 to 1990.", "She was the Prime Minister of the United Kingdom."]
+    },
+    {
+        "category": "World Leaders",
+        "answer": "Fidel Castro",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This leader was a key figure in the Cuban Revolution.", "He established a communist state in his country.", "He survived numerous assassination attempts.", "He ruled for nearly five decades.", "He was the leader of Cuba."]
+    },
+    {
+        "category": "World Leaders",
+        "answer": "Angela Merkel",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This leader has a background in physical chemistry.", "She was the first woman to hold her office in her country.", "She has been a prominent figure in the European Union.", "She served as Chancellor from 2005 to 2021.", "She was the Chancellor of Germany."]
+    },
+    {
+        "category": "World Leaders",
+        "answer": "Abraham Lincoln",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This leader delivered the Gettysburg Address.", "He issued the Emancipation Proclamation.", "He led his country during the Civil War.", "He was assassinated by John Wilkes Booth.", "He was the 16th President of the United States."]
+    },
+    {
+        "category": "World Leaders",
+        "answer": "Catherine the Great",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This leader expanded her empire significantly.", "She corresponded with Voltaire and Diderot.", "She came to power after a coup d'état.", "She reigned from 1762 to 1796.", "She was the Empress of Russia."]
+    },
+    {
+        "category": "World Leaders",
+        "answer": "Julius Caesar",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This leader was a key figure in the Roman Republic's transition to the Roman Empire.", "He was assassinated on the Ides of March.", "He wrote 'Commentarii de Bello Gallico'.", "He crossed the Rubicon, sparking a civil war.", "He was a dictator of Rome."]
+    },
+    {
+        "category": "Deserts",
+        "answer": "Sahara Desert",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This desert is the largest hot desert in the world.", "It spans across multiple North African countries.", "It is known for its vast sand dunes.", "Its name means 'desert' in Arabic.", "It is the hottest desert in the world."]
+    },
+    {
+        "category": "Deserts",
+        "answer": "Gobi Desert",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This desert is located in Asia.", "It is known for its harsh climate and extreme temperatures.", "It is bounded by the Altai Mountains and the steppes of Mongolia.", "It was part of the Mongol Empire.", "It is the largest desert in Asia."]
+    },
+    {
+        "category": "Deserts",
+        "answer": "Kalahari Desert",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This desert is located in Southern Africa.", "It spans across Botswana, Namibia, and South Africa.", "It is home to the San people.", "It is not a true desert because it receives more than 10 inches of rain per year.", "It is known for its red sand."]
+    },
+    {
+        "category": "Deserts",
+        "answer": "Atacama Desert",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This desert is located in South America.", "It is known as the driest non-polar desert in the world.", "It lies west of the Andes mountains.", "It is rich in nitrate and copper minerals.", "It is located in Chile."]
+    },
+    {
+        "category": "Deserts",
+        "answer": "Mojave Desert",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This desert is located in North America.", "It is known for the Joshua Tree.", "It includes Death Valley, the hottest place in North America.", "It spans parts of California, Nevada, Utah, and Arizona.", "It is home to Las Vegas."]
+    },
+    {
+        "category": "Deserts",
+        "answer": "Thar Desert",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This desert is also known as the Great Indian Desert.", "It forms a natural boundary between two countries.", "It is one of the most densely populated deserts in the world.", "It spans across Rajasthan in India and Sindh in Pakistan.", "It is the 17th largest desert in the world."]
+    },
+    {
+        "category": "Deserts",
+        "answer": "Arabian Desert",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This desert covers much of the Arabian Peninsula.", "It includes the Rub' al Khali, the largest continuous sand desert in the world.", "It is home to the Bedouin people.", "It spans parts of Saudi Arabia, Oman, the UAE, and Yemen.", "It is one of the largest deserts in the world."]
+    },
+    {
+        "category": "Deserts",
+        "answer": "Namib Desert",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This desert is located in Southern Africa.", "It is considered to be the oldest desert in the world.", "It is known for its high, shifting sand dunes.", "It stretches along the coast of Namibia.", "It meets the Atlantic Ocean."]
+    },
+    {
+        "category": "Deserts",
+        "answer": "Great Victoria Desert",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This desert is located in Australia.", "It is the largest desert in Australia.", "It is known for its sandhills and salt lakes.", "It spans Western Australia and South Australia.", "It is named after a British queen."]
+    },
+    {
+        "category": "Deserts",
+        "answer": "Sonoran Desert",
+        "played": false,
+        "_class": "com.SubtleSolve.model.Question",
+        "clues": ["This desert is located in North America.", "It spans parts of Arizona, California, and Mexico.", "It is known for the saguaro cactus.", "It is one of the hottest deserts in North America.", "It is home to Phoenix and Tucson."]
+    }
+]

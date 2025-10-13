@@ -28,6 +28,7 @@ public class GameController {
     @GetMapping("/api/dailypuzzle")
     public ResponseEntity<String> DailyPuzzle(@RequestParam String today) {
         // String today = payload.get("today");
+        System.out.println("in gamecontroller");
         return ResponseEntity.ok().body(puzzleService.getDailyGame(today));
     }
 }
