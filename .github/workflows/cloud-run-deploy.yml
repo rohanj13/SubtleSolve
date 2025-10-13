@@ -16,7 +16,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          distribution: "temurin" # required input
+          distribution: "temurin"
           java-version: "17"
           cache: "gradle"
 
@@ -29,10 +29,9 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ secrets.GCP_PROJECT }}
-          install_components: "gcloud-artifact-registry-docker"
 
       - name: Configure Docker for Artifact Registry
-        run: gcloud auth configure-docker ${{ secrets.REGION }}-docker.pkg.dev
+        run: gcloud auth configure-docker ${{ secrets.REGION }}-docker.pkg.dev --quiet
 
       - name: Build Spring Boot Container Image
         run: |
